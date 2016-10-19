@@ -15,20 +15,25 @@ import javax.persistence.Query;
  * @author mauricio
  */
 public class UserDAO {
-    private final EntityManager entityManager = 
-            EntityManagerProvider.createEntityManager();
     
-    public boolean isValid(UserBean userBean) {
-        User retrievedUser;
-        String username = userBean.getUsername();
-        String password = userBean.getPassword();
+    public boolean isValid(String username, String password) {
+        EntityManager entityManager = 
+                EntityManagerProvider.createEntityManager();
+        User retrievedUser = null;
         String strQuery = "SELECT u FROM User u WHERE "
                 + "u.username = :username AND u.password = :password";
-        Query query = entityManager.createQuery(strQuery)
+        try {
+            Query query = entityManager.createQuery(strQuery)
                 .setParameter("username", username)
                 .setParameter("password", password);
-        retrievedUser = (User) query.getSingleResult();
-        return retrievedUser == null;
+            retrievedUser = (User) query.getSingleResult();
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        
+        return retrievedUser != null;
     }
     
 }

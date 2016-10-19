@@ -5,6 +5,9 @@
  */
 package co.unkitsolutions.presentation.bean;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
+
 /**
  * A simple bean for the User entity
  * @author mauricio
@@ -12,6 +15,8 @@ package co.unkitsolutions.presentation.bean;
 public class UserBean {
     private String username;
     private String password;
+    @Resource
+    private SessionContext sessionContext;
 
     public UserBean(String username, String password) {
         this.username = username;

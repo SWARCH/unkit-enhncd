@@ -1,6 +1,6 @@
 <%-- 
-    Document   : error
-    Created on : Oct 18, 2016, 10:09:20 PM
+    Document   : indexCustomer
+    Created on : Oct 19, 2016, 12:33:41 AM
     Author     : mauricio
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>login</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>Error :-(</h1>
+        <h1>Welcome Customer</h1>
     </body>
 </html>

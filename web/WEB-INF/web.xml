@@ -9,9 +9,17 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>co.unkitsolutions.servlets.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/loginServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -49,8 +57,8 @@
         <auth-method>FORM</auth-method>
         <realm-name>users-realm</realm-name>
         <form-login-config>
-            <form-login-page>login.jsp</form-login-page>
-            <form-error-page>error.jsp</form-error-page>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/error.jsp</form-error-page>
         </form-login-config>
     </login-config>
     <security-role>

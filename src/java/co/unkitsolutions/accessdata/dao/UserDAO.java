@@ -16,7 +16,7 @@ import javax.persistence.Query;
  */
 public class UserDAO {
     
-    public boolean isValid(String username, String password) {
+    public User searchUser(String username, String password) {
         EntityManager entityManager = 
                 EntityManagerProvider.createEntityManager();
         User retrievedUser = null;
@@ -33,7 +33,7 @@ public class UserDAO {
             entityManager.close();
         }
         
-        return retrievedUser != null;
+        return retrievedUser;
     }
     
 }

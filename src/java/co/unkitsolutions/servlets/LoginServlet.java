@@ -5,13 +5,20 @@
  */
 package co.unkitsolutions.servlets;
 
+import co.unkitsolutions.accessdata.dao.CustomerDAO;
+import co.unkitsolutions.accessdata.dao.EmployeeDAO;
 import co.unkitsolutions.accessdata.dao.UserDAO;
+import co.unkitsolutions.accessdata.entity.Customer;
+import co.unkitsolutions.accessdata.entity.Employee;
+import co.unkitsolutions.accessdata.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static co.unkitsolutions.accessdata.dao.CustomerDAO.*;
+import static co.unkitsolutions.accessdata.dao.EmployeeDAO.*;
 
 /**
  *
@@ -33,18 +40,8 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String usr = request.getParameter("usr");
-        String pwd = request.getParameter("pwd");
-        UserDAO userDAO = new UserDAO();
-        if (userDAO.isValid(usr, pwd)) {
-            System.out.println("is valid ---------------------------");
-            request.getRequestDispatcher("/customer/indexCustomer.jsp")
-                    .forward(request, response);
-        } else {
-            System.out.println("is invalid ---------------------------");
-            request.getRequestDispatcher("/error.jsp")
-                    .forward(request, response);
-        }
+        
+        /*
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -53,7 +50,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
-            out.println("</html>");
+            out.println("</html>");*/
         }
         
     }
@@ -70,7 +67,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        
+        
+        //processRequest(request, response);
     }
 
     /**
@@ -84,7 +84,49 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+        String usr = request.getParameter("usr");
+        String pwd = request.getParameter("pwd");
+        UserDAO userDAO = new UserDAO();
+        User user = userDAO.searchUser(usr, pwd);
+        if (user != null) {
+            CustomerDAO customerDAO = new CustomerDAO();
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            Employee employee = employeeDAO.searchByUserId(user.getId());
+            Customer customer = customerDAO.searchByUserId(user.getId());
+            // This is a fucked up way for redirect, but is sufficient for now!
+            if (employee != null) {
+                request.getSession().setAttribute("employee", employee);
+                if (employee.getRole().equals(MANAGER_ROLE)) {
+                    request.getRequestDispatcher("/manager/indexManager.jsp")
+                            .forward(request, response);
+                } else if (employee.getRole().equals(MANUFACTURER_ROLE) || 
+                        employee.getRole().equals(ASSEMBLER_ROLE)) {
+                    request.getRequestDispatcher("/employee/indexEmployee.jsp")
+                            .forward(request, response);
+                }
+            } else if(customer != null) {
+                request.getSession().setAttribute("employee", employee);
+                if (customer.getType().equals(ASSEMBLER_TYPE)) {
+                    request.getRequestDispatcher("/customer/assembler/indexAssembler.jsp")
+                            .forward(request, response);
+                } else if (customer.getType().equals(WHOLESALER_TYPE)) {
+                    request.getRequestDispatcher("/customer/wholesaler/indexWholesaler.jsp")
+                            .forward(request, response);
+                }
+                
+                
+            } else {
+                request.setAttribute("error", "You're a user, but you are not assigned to a role");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                //request.getRequestDispatcher("/error.jsp")
+                 //   .forward(request, response);
+            }
+        } else {
+            request.setAttribute("error", "Unknown user, sign up first");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            //request.getRequestDispatcher("/error.jsp")
+            //        .forward(request, response);
+        }
         
     }
 

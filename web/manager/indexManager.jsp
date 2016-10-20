@@ -1,6 +1,6 @@
 <%-- 
-    Document   : indexCustomer
-    Created on : Oct 19, 2016, 12:33:41 AM
+    Document   : indexManager
+    Created on : Oct 20, 2016, 4:17:00 AM
     Author     : mauricio
 --%>
 
@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bienvenido <% request.getSession().getAttribute("currentUser").; %></h1>
+        <h1> Bienvenido <% request.getSession().getAttribute("currentUser"); %> </h1>
+        
     </body>
 </html>

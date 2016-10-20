@@ -1,6 +1,6 @@
 <%-- 
-    Document   : indexCustomer
-    Created on : Oct 19, 2016, 12:33:41 AM
+    Document   : indexWholesaler
+    Created on : Oct 20, 2016, 5:21:17 AM
     Author     : mauricio
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bienvenido <% request.getSession().getAttribute("currentUser").; %></h1>
+        <h1>Mayoristas index</h1>
     </body>
 </html>

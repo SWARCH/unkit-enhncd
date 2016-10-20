@@ -1,6 +1,6 @@
 <%-- 
-    Document   : indexManager
-    Created on : Oct 20, 2016, 4:17:00 AM
+    Document   : quitting
+    Created on : Oct 20, 2016, 9:07:00 AM
     Author     : mauricio
 --%>
 
@@ -9,10 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manager Home</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1> Bienvenido <%= request.getSession().getAttribute("employee-name") %> </h1>
-        
+        <h1>Hello World!</h1>
     </body>
 </html>

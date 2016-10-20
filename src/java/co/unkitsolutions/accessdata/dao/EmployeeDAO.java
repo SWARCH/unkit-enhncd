@@ -16,6 +16,8 @@ public class EmployeeDAO {
     public static final String MANAGER_ROLE = "manager";
     public static final String MANUFACTURER_ROLE = "manufacturer";
     public static final String ASSEMBLER_ROLE = "assembler";
+    public static final Character FEMALE = 'F';
+    public static final Character MALE = 'M';
     
     public Employee searchByUserId(String userId) {
         EntityManager em = EntityManagerProvider.createEntityManager();

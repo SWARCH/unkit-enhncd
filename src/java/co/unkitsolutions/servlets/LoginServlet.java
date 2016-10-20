@@ -67,10 +67,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        
-        //processRequest(request, response);
     }
 
     /**
@@ -96,6 +92,9 @@ public class LoginServlet extends HttpServlet {
             // This is a fucked up way for redirect, but is sufficient for now!
             if (employee != null) {
                 request.getSession().setAttribute("employee", employee);
+                request.getSession().setAttribute("employee-gender", employee.getGender());
+                request.getSession().setAttribute("employee-contract", employee.getContractType());
+                request.getSession().setAttribute("employee-name", employee.getName());
                 if (employee.getRole().equals(MANAGER_ROLE)) {
                     request.getRequestDispatcher("/manager/indexManager.jsp")
                             .forward(request, response);

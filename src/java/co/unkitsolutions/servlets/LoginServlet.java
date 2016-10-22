@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
         
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -88,13 +88,13 @@ public class LoginServlet extends HttpServlet {
             CustomerDAO customerDAO = new CustomerDAO();
             EmployeeDAO employeeDAO = new EmployeeDAO();
             Employee employee = employeeDAO.searchByUserId(user.getId());
-            Customer customer = customerDAO.searchByUserId(user.getId());
+            Customer customer = customerDAO.searchById(user.getId());
             // This is a fucked up way for redirect, but is sufficient for now!
             if (employee != null) {
                 request.getSession().setAttribute("employee", employee);
-                request.getSession().setAttribute("employee-gender", employee.getGender());
-                request.getSession().setAttribute("employee-contract", employee.getContractType());
-                request.getSession().setAttribute("employee-name", employee.getName());
+                request.getSession().setAttribute("employeeGender", employee.getGender());
+                request.getSession().setAttribute("employeeContractType", employee.getContractType());
+                request.getSession().setAttribute("employeeName", employee.getName());
                 if (employee.getRole().equals(MANAGER_ROLE)) {
                     request.getRequestDispatcher("/manager/indexManager.jsp")
                             .forward(request, response);
@@ -104,7 +104,8 @@ public class LoginServlet extends HttpServlet {
                             .forward(request, response);
                 }
             } else if(customer != null) {
-                request.getSession().setAttribute("employee", employee);
+                request.getSession().setAttribute("customer", customer);
+                request.getSession().setAttribute("customerName", customer.getTradeName());
                 if (customer.getType().equals(ASSEMBLER_TYPE)) {
                     request.getRequestDispatcher("/customer/assembler/indexAssembler.jsp")
                             .forward(request, response);

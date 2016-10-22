@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Despido de empleados</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Despido de empleados</h1>
     </body>
 </html>

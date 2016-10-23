@@ -5,7 +5,8 @@
  */
 package co.unkitsolutions.accessdata.dao;
 
-import co.unkitsolutions.accessdata.entity.Employee;
+import co.unkitsolutions.accessdata.entity.Part;
+import co.unkitsolutions.accessdata.entity.Vehicle;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,48 +15,49 @@ import javax.persistence.EntityManager;
  *
  * @author mauricio
  */
-public class EmployeeDAO implements DAO<Employee>, Serializable {
+public class VehicleDAO implements DAO<Vehicle>, Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Override
-    public List<Employee> searchAll() {
+    public List<Vehicle> searchAll() {
         EntityManager em = EntityManagerProvider.createEntityManager();
-        List<Employee> retrievedEmployees = null;
+        List<Vehicle> retrievedVehicles = null;
         try {
-            retrievedEmployees = em.createNamedQuery("Employee.findAll")
+            retrievedVehicles = em.createNamedQuery("Vehicle.findAll")
                 .getResultList();
         } catch(Exception e) {
-            System.err.println("Problems in EmployeeDAO.searchAll(): " + e);
+            System.err.println("Problems in VehicleDAO.searchAll(): " + e);
         } finally {
             em.close();
         }
-        return retrievedEmployees;
+        return retrievedVehicles;
     }
 
     @Override
-    public Employee searchById(String id) {
+    public Vehicle searchById(String id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
-        Employee employee = null;
+        Vehicle vehicle = null;
         try {
-            employee = em.find(Employee.class, id);
+            vehicle = em.find(Vehicle.class, id);
         } catch (Exception e) {
-            System.err.println("Problems in EmployeeDAO.searchByUserId(): " + e);
+            System.err.println("Problems in VehicleDAO.searchByUserId(): " + e);
         } finally {
             em.close();
         }
-        return employee;
+        return vehicle;
     }
 
     @Override
-    public boolean create(Employee newEmployee) {
+    public boolean create(Vehicle newVehicle) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         em.getTransaction().begin();
         try {
-            em.persist(newEmployee);
+            em.persist(newVehicle);
             em.getTransaction().commit();
             isSuccessful = true;
         } catch (Exception e) {
-            System.err.println("Problems in employeeDAO.create(): " + e);
+            System.err.println("Problems in VehicleDAO.create(): " + e);
             em.getTransaction().rollback();
         } finally {
             em.close();
@@ -64,24 +66,19 @@ public class EmployeeDAO implements DAO<Employee>, Serializable {
     }
 
     @Override
-    public boolean update(String id, Employee editedEmployee) {
-        Employee tmpEmployee;
+    public boolean update(String id, Vehicle editedVehicle) {
+        Vehicle tmpVehicle;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
         em.getTransaction().begin();
         try {
-            tmpEmployee = em.merge(this.searchById(id));
-            
-            tmpEmployee.setName(editedEmployee.getName());
-            tmpEmployee.setGender(editedEmployee.getGender());
-            tmpEmployee.setRole(editedEmployee.getRole());
-            tmpEmployee.setSalary(editedEmployee.getSalary());
-            tmpEmployee.setContractStatus(editedEmployee.getContractStatus());
-            tmpEmployee.setContractType(editedEmployee.getContractType());
-            
+            tmpVehicle = em.merge(this.searchById(id));
+            tmpVehicle.setCost(editedVehicle.getCost());
+            tmpVehicle.setDescription(editedVehicle.getDescription());
+            tmpVehicle.setUnits(editedVehicle.getUnits());
             em.getTransaction().commit();
         } catch (Exception e) {
-            System.err.println("Problems in EmployeeDAO.update(): " + e);
+            System.err.println("Problems in VehicleDAO.update(): " + e);
             em.getTransaction().rollback();
             isSuccessful = false;
         } finally {
@@ -94,16 +91,14 @@ public class EmployeeDAO implements DAO<Employee>, Serializable {
     public boolean delete(String id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
-        Employee delEmployee = this.searchById(id);
-        UserDAO userDAO = new UserDAO();
+        Vehicle delVehicle = this.searchById(id);
         em.getTransaction().begin();
         try {
-            em.remove(delEmployee);
-            userDAO.delete(id);
+            em.remove(delVehicle);
             em.getTransaction().commit();
             isSuccessful = true;
         } catch (Exception e) {
-            System.err.println("Problems in EmployeeDAO.delete(): " + e);
+            System.err.println("Problems in VehicleDAO.delete(): " + e);
             em.getTransaction().rollback();
         } finally {
             em.close();

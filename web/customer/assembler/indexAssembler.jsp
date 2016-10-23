@@ -30,7 +30,7 @@
 
             <h1> Bienvenidos <%= request.getSession().getAttribute("customerName")%> </h1>
             <div class="row">
-                <a class="btn btn-default" href="customer/assembler/shop.jsp" role="button">Tienda</a>
+                <a class="btn btn-default" href="customer/assembler/partsShop.jsp" role="button">Tienda</a>
                 <a class="btn btn-default" href="/showParts" role="button">Invocar Servlet</a>
                 <a class="btn btn-default" href="/logout" role="button">Salir</a>
             </div>

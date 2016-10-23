@@ -16,8 +16,6 @@ import javax.persistence.EntityManager;
  */
 public class CustomerDAO implements DAO<Customer>, Serializable {
     private static final long serialVersionUID = 1L;
-    public static final String WHOLESALER_TYPE = "wholesaler";
-    public static final String ASSEMBLER_TYPE = "assembler";
 
     @Override
     public List<Customer> searchAll() {
@@ -58,7 +56,7 @@ public class CustomerDAO implements DAO<Customer>, Serializable {
             em.getTransaction().commit();
             isSuccessful = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Problems in CustomerDAO.create(): " + e);
             em.getTransaction().rollback();
         } finally {
             em.close();
@@ -78,7 +76,7 @@ public class CustomerDAO implements DAO<Customer>, Serializable {
             tmpCustomer.setType(editedCustomer.getType());
             em.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Problems in CustomerDAO.update(): " + e);
             em.getTransaction().rollback();
             isSuccessful = false;
         } finally {
@@ -100,7 +98,7 @@ public class CustomerDAO implements DAO<Customer>, Serializable {
             em.getTransaction().commit();
             isSuccessful = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Problems in CustomerDAO.delete(): " + e);
             em.getTransaction().rollback();
         } finally {
             em.close();

@@ -47,8 +47,7 @@ public class LogoutServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+   /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -74,7 +73,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        System.out.println("POST ----------------------------------------");
+        System.out.println("logout POST ----------------------------------------");
         // Destroys the session for this user.
         if (session != null) {
             session.invalidate();

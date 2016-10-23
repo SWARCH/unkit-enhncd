@@ -17,8 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static co.unkitsolutions.accessdata.dao.CustomerDAO.*;
-import static co.unkitsolutions.accessdata.dao.EmployeeDAO.*;
+import static co.unkitsolutions.accessdata.entity.Customer.*;
+import static co.unkitsolutions.accessdata.entity.Employee.*;
 
 /**
  *
@@ -83,18 +83,21 @@ public class LoginServlet extends HttpServlet {
         String usr = request.getParameter("usr");
         String pwd = request.getParameter("pwd");
         UserDAO userDAO = new UserDAO();
-        User user = userDAO.searchUser(usr, pwd);
+        User user = userDAO.searchValidUser(usr, pwd);
         if (user != null) {
             CustomerDAO customerDAO = new CustomerDAO();
             EmployeeDAO employeeDAO = new EmployeeDAO();
-            Employee employee = employeeDAO.searchByUserId(user.getId());
+            Employee employee = employeeDAO.searchById(user.getId());
             Customer customer = customerDAO.searchById(user.getId());
             // This is a fucked up way for redirect, but is sufficient for now!
             if (employee != null) {
                 request.getSession().setAttribute("employee", employee);
-                request.getSession().setAttribute("employeeGender", employee.getGender());
-                request.getSession().setAttribute("employeeContractType", employee.getContractType());
-                request.getSession().setAttribute("employeeName", employee.getName());
+                request.getSession().setAttribute("employeeGender", 
+                        employee.getGender());
+                request.getSession().setAttribute("employeeContractType", 
+                        employee.getContractType());
+                request.getSession().setAttribute("employeeName", 
+                        employee.getName());
                 if (employee.getRole().equals(MANAGER_ROLE)) {
                     request.getRequestDispatcher("/manager/indexManager.jsp")
                             .forward(request, response);
@@ -105,25 +108,31 @@ public class LoginServlet extends HttpServlet {
                 }
             } else if(customer != null) {
                 request.getSession().setAttribute("customer", customer);
-                request.getSession().setAttribute("customerName", customer.getTradeName());
+                request.getSession().setAttribute("customerName", 
+                        customer.getTradeName());
                 if (customer.getType().equals(ASSEMBLER_TYPE)) {
-                    request.getRequestDispatcher("/customer/assembler/indexAssembler.jsp")
+                    request.getRequestDispatcher("/customer/assembler/"
+                            + "indexAssembler.jsp")
                             .forward(request, response);
                 } else if (customer.getType().equals(WHOLESALER_TYPE)) {
-                    request.getRequestDispatcher("/customer/wholesaler/indexWholesaler.jsp")
+                    request.getRequestDispatcher("/customer/wholesaler/"
+                            + "indexWholesaler.jsp")
                             .forward(request, response);
                 }
                 
                 
             } else {
-                request.setAttribute("error", "You're a user, but you are not assigned to a role");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.setAttribute("error", 
+                        "You're a user, but you are not assigned to a role");
+                request.getRequestDispatcher("/login.jsp")
+                        .forward(request, response);
                 //request.getRequestDispatcher("/error.jsp")
                  //   .forward(request, response);
             }
         } else {
             request.setAttribute("error", "Unknown user, sign up first");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login.jsp")
+                    .forward(request, response);
             //request.getRequestDispatcher("/error.jsp")
             //        .forward(request, response);
         }

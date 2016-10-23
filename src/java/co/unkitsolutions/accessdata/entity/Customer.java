@@ -38,6 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final String WHOLESALER_TYPE = "wholesaler";
+    public static final String ASSEMBLER_TYPE = "assembler";
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)

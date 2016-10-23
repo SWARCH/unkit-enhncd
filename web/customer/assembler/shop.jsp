@@ -14,6 +14,7 @@
     PartDAO partDao = new PartDAO();
     List<Part> partList = partDao.searchAll();
     List<Part> shoopingCart = new ArrayList<Part>();
+    request.getSession().setAttribute("shopingCartItems", shoopingCart.size());
     System.out.println("--------------shop.jps : " + partList);
 %>
 <html>
@@ -76,6 +77,24 @@
 
                 </table>
             </form>
+                    Hay <%= request.getSession().getAttribute("shopingCartItems")%>
+                    elementos el carrito de compras.
+            <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+            <h3>Carrito de compras</h3>
+            
+            <%
+                int i = 0;
+                for (Part p : partList) {
+                    
+            %>
+            
+                <%=p.getId()%>[
+                <a href="posDelPart?pos=<%i++;%>">Borrar</a>]<br>
+            
+            <%
+                }
+            %>
+            
         </div>
     </body>
 </html>

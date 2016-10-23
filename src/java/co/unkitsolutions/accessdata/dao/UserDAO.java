@@ -18,7 +18,7 @@ import javax.persistence.Query;
 public class UserDAO implements DAO<User>, Serializable {
     private static final long serialVersionUID = 1L;
     
-    public User searchUser(String username, String password) {
+    public User searchValidUser(String username, String password) {
         EntityManager entityManager = 
                 EntityManagerProvider.createEntityManager();
         User retrievedUser = null;

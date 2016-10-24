@@ -37,22 +37,26 @@
                     <form action="loginServlet" method="post">
                         <div class="form-group">
                             <label for="inputUsername">Nombre de usuario</label>
-                            <input class="form-control" type="text" name="usr">
+                            <input class="form-control" type="text" name="user">
                         </div>
                         <div class="form-group">
                             <label for="inputName">Razón social</label>
-                            <input class="form-control" type="text" name="usr">
+                            <input class="form-control" type="text" name="tradeName">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputID">Nit</label>
+                            <input class="form-control" type="text" name="id">
                         </div>
                         <div class="form-group">
                             <label for="inputType">Tipo de empresa</label>
-                            <select name="Tipo">
+                            <select name="type">
                                 <option value="Ensambladora">Ensambladora</option>
                                 <option value="Mayorista">Mayorista</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="inputUsername">Contraseña</label>
-                            <input class="form-control" type="password" name="pwd">
+                            <input class="form-control" type="password" name="password">
                         </div>
                         <button type="submit" class="btn btn-default">Ingresar</button>
                         <br><br>

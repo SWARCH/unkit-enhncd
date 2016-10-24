@@ -6,20 +6,16 @@
 package co.unkitsolutions.accessdata.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -56,11 +52,8 @@ public class Part implements Serializable {
     @NotNull
     @Column(name = "cost")
     private double cost;
-    @Size(max = 45)
     @Column(name = "units")
-    private String units;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "part")
-    private Collection<OrderPart> orderPartCollection;
+    private Integer units;
 
     public Part() {
     }
@@ -107,21 +100,12 @@ public class Part implements Serializable {
         this.cost = cost;
     }
 
-    public String getUnits() {
+    public Integer getUnits() {
         return units;
     }
 
-    public void setUnits(String units) {
+    public void setUnits(Integer units) {
         this.units = units;
-    }
-
-    @XmlTransient
-    public Collection<OrderPart> getOrderPartCollection() {
-        return orderPartCollection;
-    }
-
-    public void setOrderPartCollection(Collection<OrderPart> orderPartCollection) {
-        this.orderPartCollection = orderPartCollection;
     }
 
     @Override
@@ -146,7 +130,7 @@ public class Part implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.Part[ id=" + id + " ]";
+        return "co.unkitsolutions.accessdata.entity.Part[ id=" + id + " ]";
     }
     
 }

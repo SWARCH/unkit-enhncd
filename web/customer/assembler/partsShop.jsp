@@ -35,11 +35,11 @@
                 <th>Descripción</th>
                 <th>Costo</th>
                 <th>Stock</th>
+                <th>Cantidad</th>
                 <th>*</th>
             </tr>
 
             <%
-                System.out.print("First OK");
                 int j = 0;
                 for (Part p : allParts) {
             %>
@@ -50,6 +50,11 @@
                 <td><%=p.getDescription()%></td>
                 <td>$<%=p.getCost()%></td>
                 <td><%=p.getUnits()%></td>
+                <td><form action="posAddPart" method ="post">
+                    <input class="form-control" type="number" name="quantity">
+                    <button type="submit" class="btn btn-default">Guardar</button>
+                    </form>
+                </td>
                 <td>
                     <a href="${pageContext.request.contextPath}/posAddPart?index=<%=j++%>">Agregar</a>
                 </td>
@@ -69,14 +74,12 @@
                 <th>Nombre</th> 
                 <th>Descripción</th>
                 <th>Costo</th>
-                <th>Stock</th>
                 <th>*</th>
             </tr>
 
             <%  if (partsToBuy != null && partsToBuy.size() != 0) {
                     int k = 0;
                     for (int i = 0; i < partsToBuy.size(); i++) {
-                        System.out.print("inside for");
             %>
 
             <tr>
@@ -84,7 +87,6 @@
                 <td><%= partsToBuy.get(i).getName()%></td>
                 <td><%= partsToBuy.get(i).getDescription()%></td>
                 <td><%= partsToBuy.get(i).getCost()%></td>
-                <td><%= partsToBuy.get(i).getUnits()%></td>
                 <td><a href="posDelPart?pos=<%=k++%>">Borrar</a></td>
             </tr>
 

@@ -6,20 +6,16 @@
 package co.unkitsolutions.accessdata.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -65,11 +61,8 @@ public class Vehicle implements Serializable {
     @NotNull
     @Column(name = "cost")
     private double cost;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "units")
-    private Double units;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehicle")
-    private Collection<OrderVehicle> orderVehicleCollection;
+    private Integer units;
 
     public Vehicle() {
     }
@@ -133,21 +126,12 @@ public class Vehicle implements Serializable {
         this.cost = cost;
     }
 
-    public Double getUnits() {
+    public Integer getUnits() {
         return units;
     }
 
-    public void setUnits(Double units) {
+    public void setUnits(Integer units) {
         this.units = units;
-    }
-
-    @XmlTransient
-    public Collection<OrderVehicle> getOrderVehicleCollection() {
-        return orderVehicleCollection;
-    }
-
-    public void setOrderVehicleCollection(Collection<OrderVehicle> orderVehicleCollection) {
-        this.orderVehicleCollection = orderVehicleCollection;
     }
 
     @Override
@@ -172,7 +156,7 @@ public class Vehicle implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.Vehicle[ id=" + id + " ]";
+        return "co.unkitsolutions.accessdata.entity.Vehicle[ id=" + id + " ]";
     }
     
 }

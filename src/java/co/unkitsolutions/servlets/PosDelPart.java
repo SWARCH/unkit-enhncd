@@ -5,7 +5,6 @@
  */
 package co.unkitsolutions.servlets;
 
-import co.unkitsolutions.accessdata.dao.PartDAO;
 import co.unkitsolutions.accessdata.entity.Part;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,9 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mauricio
  */
-@WebServlet(name = "PosAddPart", urlPatterns = {"/posAddPart"})
-public class PosAddPart extends HttpServlet {
-    private Integer q;
+@WebServlet(name = "PosDelPart", urlPatterns = {"/posDelPart"})
+public class PosDelPart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,17 +34,16 @@ public class PosAddPart extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PosAddPart</title>");
+            out.println("<title>Servlet PosDelPart</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PosAddPart at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PosDelPart at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,24 +60,13 @@ public class PosAddPart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Enter pos add");
-        PartDAO partDAO = new PartDAO();
         List<Part> partsToBuy = (ArrayList<Part>) request.getSession().getAttribute("partsToBuy");
-        List<Part> allParts = partDAO.searchAll();
+        int pos = Integer.parseInt(request.getParameter("pos"));
         
-        System.out.println("partsToBuy " + partsToBuy);
-        System.out.println("allParts " + allParts);
-        
-        int index = Integer.parseInt(request.getParameter("index"));
-        System.out.println("index = " + index);
-        Part buyedPart = allParts.get(index);
-        
-        partsToBuy.add(buyedPart);
-        System.out.println("partsToBuy" + partsToBuy);
-        buyedPart.setUnits(buyedPart.getUnits() - 1); // To correct later
+        System.out.println("pos = " + pos);
+        partsToBuy.remove(pos);
         request.getRequestDispatcher("/customer/assembler/partsShop.jsp")
                 .forward(request, response);
-
     }
 
     /**
@@ -94,8 +80,7 @@ public class PosAddPart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        q = Integer.parseInt(request.getParameter("quantity"));
-        
+        processRequest(request, response);
     }
 
     /**

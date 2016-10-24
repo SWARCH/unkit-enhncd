@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSessionListener;
  * @author mauricio
  */
 @WebListener
-public class EscuchaSession implements HttpSessionListener {
+public class MySessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
@@ -26,7 +26,6 @@ public class EscuchaSession implements HttpSessionListener {
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         HttpSession session = se.getSession();
-        System.out.println("Creada, ID=" + session.getId());
+        System.out.println("Cerrada, ID=" + session.getId());
     }
-
 }

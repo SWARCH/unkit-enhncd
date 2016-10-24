@@ -34,7 +34,7 @@
                     <div class="row text-center">
                         <h3>Registro</h3>
                     </div>
-                    <form action="loginServlet" method="post">
+                    <form action="RegisterCustomer" method="post">
                         <div class="form-group">
                             <label for="inputUsername">Nombre de usuario</label>
                             <input class="form-control" type="text" name="user">
@@ -50,15 +50,15 @@
                         <div class="form-group">
                             <label for="inputType">Tipo de empresa</label>
                             <select name="type">
-                                <option value="Ensambladora">Ensambladora</option>
-                                <option value="Mayorista">Mayorista</option>
+                                <option value="assembler">Ensambladora</option>
+                                <option value="wholesaler">Mayorista</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="inputUsername">Contraseña</label>
                             <input class="form-control" type="password" name="password">
                         </div>
-                        <button type="submit" class="btn btn-default">Ingresar</button>
+                        <button type="submit" class="btn btn-default">Registrarse</button>
                         <br><br>
                         <span class="error">${error}</span>
                     </form>

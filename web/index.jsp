@@ -36,7 +36,7 @@
             <!--Start button bar-->
             <div class="row">
                 <a class="btn btn-default" href="login.jsp" role="button">Ingresar</a>
-                <a class="btn btn-default" href="login.jsp" role="button">Trabaje aquí</a>
+                <a class="btn btn-default" href="registerCustomer.jsp" role="button">Registrese aquí</a>
                 <a class="btn btn-default" href="login.jsp" role="button">¿Quienes somos?</a>
             </div>
             <!--End button bar-->

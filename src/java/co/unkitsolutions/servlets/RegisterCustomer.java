@@ -9,6 +9,7 @@ import co.unkitsolutions.accessdata.dao.CustomerDAO;
 import co.unkitsolutions.accessdata.dao.UserDAO;
 import co.unkitsolutions.accessdata.entity.Customer;
 import co.unkitsolutions.accessdata.entity.User;
+import co.unkitsolutions.businesslogic.controller.CustomerController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -82,23 +83,9 @@ public class RegisterCustomer extends HttpServlet {
         String type = request.getParameter("type");
         String password = request.getParameter("password");
         
-        User user=new User();
-        Customer customer = new Customer();
-        
-        user.setId(id);
-        user.setPassword(password);
-        user.setUsername(usr);
-        
-        customer.setUserId(id);
-        customer.setTradeName(tradeName);
-        customer.setType(type);
-        
-        UserDAO userDAO = new UserDAO();
-        CustomerDAO customerDAO = new CustomerDAO();
-        
-        userDAO.create(user);
-        customerDAO.create(customer);
-        
+        CustomerController customer = new CustomerController();
+        customer.registerCustomer(usr, tradeName, id, type, password);
+                
         request.getRequestDispatcher("/login.jsp")
                     .forward(request, response);
     }

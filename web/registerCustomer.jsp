@@ -55,8 +55,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="inputUsername">Contraseña</label>
+                            <label for="inputPassword">Contraseña</label>
                             <input class="form-control" type="password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordC">Confirme su contraseña</label>
+                            <input class="form-control" type="password" name="passwordC">
                         </div>
                         <button type="submit" class="btn btn-default">Registrarse</button>
                         <br><br>

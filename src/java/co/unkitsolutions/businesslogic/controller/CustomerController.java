@@ -15,26 +15,38 @@ import co.unkitsolutions.accessdata.entity.User;
  * @author lorenags
  */
 public class CustomerController {
-    
-    public void registerCustomer(String userName, String tradeName, String id, String type, String password){
-        
-        User user=new User();
+
+    public String registerCustomer(String userName, String tradeName, String id, String type, String password, String passwordC) {
+
+        User user = new User();
         Customer customer = new Customer();
-        
+
         user.setId(id);
         user.setPassword(password);
         user.setUsername(userName);
-        
+
         customer.setUserId(id);
         customer.setTradeName(tradeName);
         customer.setType(type);
-        
+
         UserDAO userDAO = new UserDAO();
-        CustomerDAO customerDAO = new CustomerDAO();
-        
-        userDAO.create(user);
-        customerDAO.create(customer);
-        
+
+        if (userDAO.searchByUsername(userName) == null) {
+            if (userDAO.searchById(id) == null) {
+                if (password.equals(passwordC) == true) {
+                    CustomerDAO customerDAO = new CustomerDAO();
+                    userDAO.create(user);
+                    customerDAO.create(customer);
+                    return "Su cuenta se creó exitosamente";
+                } else {
+                    return "Las contraseñas no coinciden";
+                }
+            } else {
+                return "El número de identificación ya está registrado";
+            }
+        }else{
+            return "El nombre de ususario ya existe";
+        }
     }
-    
+
 }

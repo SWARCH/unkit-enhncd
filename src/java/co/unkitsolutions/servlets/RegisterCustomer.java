@@ -39,15 +39,15 @@ public class RegisterCustomer extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           /* out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterCustomer</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterCustomer at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");*/
+            /* out.println("<!DOCTYPE html>");
+             out.println("<html>");
+             out.println("<head>");
+             out.println("<title>Servlet RegisterCustomer</title>");            
+             out.println("</head>");
+             out.println("<body>");
+             out.println("<h1>Servlet RegisterCustomer at " + request.getContextPath() + "</h1>");
+             out.println("</body>");
+             out.println("</html>");*/
         }
     }
 
@@ -82,12 +82,19 @@ public class RegisterCustomer extends HttpServlet {
         String id = request.getParameter("id");
         String type = request.getParameter("type");
         String password = request.getParameter("password");
-        
+        String passwordC = request.getParameter("passwordC");
+
         CustomerController customer = new CustomerController();
-        customer.registerCustomer(usr, tradeName, id, type, password);
-                
-        request.getRequestDispatcher("/login.jsp")
+        String message = customer.registerCustomer(usr, tradeName, id, type, password, passwordC);
+
+        if (message.equals("Su cuenta se creó exitosamente")) {
+            request.getRequestDispatcher("/login.jsp")
                     .forward(request, response);
+        } else {
+            request.setAttribute("error", message);
+            request.getRequestDispatcher("/registerCustomer.jsp")
+                    .forward(request, response);
+        }
     }
 
     /**

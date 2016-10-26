@@ -9,6 +9,7 @@ import co.unkitsolutions.accessdata.entity.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -67,6 +68,24 @@ public class UserDAO implements DAO<User>, Serializable {
         return user;
     }
 
+    
+    public User searchByUsername(String username){
+        
+        EntityManager em = EntityManagerProvider.createEntityManager();
+        User user = null;
+        Query q = em.createNamedQuery("User.findByUsername");
+        q.setParameter("username", username);
+        try{
+            user = (User)q.getSingleResult();
+        }catch(Exception e){
+         e.printStackTrace();
+         System.out.println(e);
+        }finally{
+            em.close();
+        }
+        return user;
+    }
+    
     @Override
     public boolean create(User newUser) {
         boolean isSuccessful = false;

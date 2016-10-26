@@ -1,7 +1,7 @@
 <%-- 
-    Document   : login
-    Created on : Oct 18, 2016, 11:43:13 PM
-    Author     : mauricio
+    Document   : registerCustomer
+    Created on : Oct 23, 2016, 02:43:13 PM
+    Author     : lorena
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

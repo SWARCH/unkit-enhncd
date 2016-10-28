@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unkitsolutions.servlets;
 
 import co.unkitsolutions.accessdata.dao.PartDAO;
@@ -80,7 +75,6 @@ public class PosAddPart extends HttpServlet {
         buyedPart.setUnits(buyedPart.getUnits() - 1); // To correct later
         request.getRequestDispatcher("/customer/assembler/partsShop.jsp")
                 .forward(request, response);
-
     }
 
     /**

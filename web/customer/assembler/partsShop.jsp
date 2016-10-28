@@ -31,19 +31,17 @@
         <table class="table" style="border:1px solid black;">
             <tr>
                 <th>Id</th>
-                <th>Nombre</th> 
+                <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Costo</th>
                 <th>Stock</th>
                 <th>Cantidad</th>
                 <th>*</th>
             </tr>
-
             <%
                 int j = 0;
                 for (Part p : allParts) {
             %>
-
             <tr>
                 <td><%=p.getId()%></td>
                 <td><%=p.getName()%></td>
@@ -71,17 +69,15 @@
         <table class="table" style="border:1px solid black;">
             <tr>
                 <th>Id</th>
-                <th>Nombre</th> 
+                <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Costo</th>
                 <th>*</th>
             </tr>
-
             <%  if (partsToBuy != null && partsToBuy.size() != 0) {
                     int k = 0;
                     for (int i = 0; i < partsToBuy.size(); i++) {
             %>
-
             <tr>
                 <td><%= partsToBuy.get(i).getId()%></td>
                 <td><%= partsToBuy.get(i).getName()%></td>

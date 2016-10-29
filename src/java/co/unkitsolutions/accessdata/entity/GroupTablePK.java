@@ -16,60 +16,60 @@ import javax.validation.constraints.NotNull;
  * @author mauricio
  */
 @Embeddable
-public class ProductOrderPK implements Serializable {
+public class GroupTablePK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id")
-    private int id;
+    @Column(name = "groupId")
+    private int groupId;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "customerId")
-    private int customerId;
+    @Column(name = "userId")
+    private int userId;
 
-    public ProductOrderPK() {
+    public GroupTablePK() {
     }
 
-    public ProductOrderPK(int id, int customerId) {
-        this.id = id;
-        this.customerId = customerId;
+    public GroupTablePK(int groupId, int userId) {
+        this.groupId = groupId;
+        this.userId = userId;
     }
 
-    public int getId() {
-        return id;
+    public int getGroupId() {
+        return groupId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
-        hash += (int) customerId;
+        hash += (int) groupId;
+        hash += (int) userId;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ProductOrderPK)) {
+        if (!(object instanceof GroupTablePK)) {
             return false;
         }
-        ProductOrderPK other = (ProductOrderPK) object;
-        if (this.id != other.id) {
+        GroupTablePK other = (GroupTablePK) object;
+        if (this.groupId != other.groupId) {
             return false;
         }
-        if (this.customerId != other.customerId) {
+        if (this.userId != other.userId) {
             return false;
         }
         return true;
@@ -77,7 +77,7 @@ public class ProductOrderPK implements Serializable {
 
     @Override
     public String toString() {
-        return "co.unkitsolutions.accessdata.entity.ProductOrderPK[ id=" + id + ", customerId=" + customerId + " ]";
+        return "co.unkitsolutions.accessdata.entity.GroupTablePK[ groupId=" + groupId + ", userId=" + userId + " ]";
     }
     
 }

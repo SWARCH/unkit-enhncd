@@ -6,8 +6,8 @@
 package co.unkitsolutions.accessdata.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -59,9 +59,9 @@ public class ProductOrder implements Serializable {
     @ManyToOne(optional = false)
     private Customer customer;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
-    private Collection<OrderVehicle> orderVehicleCollection;
+    private List<OrderVehicle> orderVehicleList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
-    private Collection<OrderPart> orderPartCollection;
+    private List<OrderPart> orderPartList;
 
     public ProductOrder() {
     }
@@ -75,7 +75,7 @@ public class ProductOrder implements Serializable {
         this.date = date;
     }
 
-    public ProductOrder(String id, String customerId) {
+    public ProductOrder(int id, int customerId) {
         this.productOrderPK = new ProductOrderPK(id, customerId);
     }
 
@@ -120,21 +120,21 @@ public class ProductOrder implements Serializable {
     }
 
     @XmlTransient
-    public Collection<OrderVehicle> getOrderVehicleCollection() {
-        return orderVehicleCollection;
+    public List<OrderVehicle> getOrderVehicleList() {
+        return orderVehicleList;
     }
 
-    public void setOrderVehicleCollection(Collection<OrderVehicle> orderVehicleCollection) {
-        this.orderVehicleCollection = orderVehicleCollection;
+    public void setOrderVehicleList(List<OrderVehicle> orderVehicleList) {
+        this.orderVehicleList = orderVehicleList;
     }
 
     @XmlTransient
-    public Collection<OrderPart> getOrderPartCollection() {
-        return orderPartCollection;
+    public List<OrderPart> getOrderPartList() {
+        return orderPartList;
     }
 
-    public void setOrderPartCollection(Collection<OrderPart> orderPartCollection) {
-        this.orderPartCollection = orderPartCollection;
+    public void setOrderPartList(List<OrderPart> orderPartList) {
+        this.orderPartList = orderPartList;
     }
 
     @Override
@@ -159,7 +159,7 @@ public class ProductOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.ProductOrder[ productOrderPK=" + productOrderPK + " ]";
+        return "co.unkitsolutions.accessdata.entity.ProductOrder[ productOrderPK=" + productOrderPK + " ]";
     }
     
 }

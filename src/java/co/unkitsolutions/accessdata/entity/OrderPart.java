@@ -12,13 +12,11 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,7 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrderPart.findAll", query = "SELECT o FROM OrderPart o"),
     @NamedQuery(name = "OrderPart.findByOrderId", query = "SELECT o FROM OrderPart o WHERE o.orderPartPK.orderId = :orderId"),
     @NamedQuery(name = "OrderPart.findByCustomerId", query = "SELECT o FROM OrderPart o WHERE o.orderPartPK.customerId = :customerId"),
-    @NamedQuery(name = "OrderPart.findByPartId", query = "SELECT o FROM OrderPart o WHERE o.orderPartPK.partId = :partId")})
+    @NamedQuery(name = "OrderPart.findByPartId", query = "SELECT o FROM OrderPart o WHERE o.orderPartPK.partId = :partId"),
+    @NamedQuery(name = "OrderPart.findByQuantity", query = "SELECT o FROM OrderPart o WHERE o.quantity = :quantity")})
 public class OrderPart implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,10 +39,8 @@ public class OrderPart implements Serializable {
     protected OrderPartPK orderPartPK;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 16777215)
     @Column(name = "quantity")
-    private String quantity;
+    private int quantity;
     @JoinColumns({
         @JoinColumn(name = "orderId", referencedColumnName = "id", insertable = false, updatable = false),
         @JoinColumn(name = "customerId", referencedColumnName = "customerId", insertable = false, updatable = false)})
@@ -60,12 +57,12 @@ public class OrderPart implements Serializable {
         this.orderPartPK = orderPartPK;
     }
 
-    public OrderPart(OrderPartPK orderPartPK, String quantity) {
+    public OrderPart(OrderPartPK orderPartPK, int quantity) {
         this.orderPartPK = orderPartPK;
         this.quantity = quantity;
     }
 
-    public OrderPart(String orderId, String customerId, String partId) {
+    public OrderPart(int orderId, int customerId, int partId) {
         this.orderPartPK = new OrderPartPK(orderId, customerId, partId);
     }
 
@@ -77,11 +74,11 @@ public class OrderPart implements Serializable {
         this.orderPartPK = orderPartPK;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -123,7 +120,7 @@ public class OrderPart implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.OrderPart[ orderPartPK=" + orderPartPK + " ]";
+        return "co.unkitsolutions.accessdata.entity.OrderPart[ orderPartPK=" + orderPartPK + " ]";
     }
     
 }

@@ -6,6 +6,7 @@
 package co.unkitsolutions.accessdata.dao;
 
 import co.unkitsolutions.accessdata.entity.OrderPart;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -13,7 +14,8 @@ import javax.persistence.EntityManager;
  *
  * @author mauricio
  */
-public class OrderPartDAO implements DAO<OrderPart>{
+public class OrderPartDAO implements DAO<OrderPart>, Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Override
     public List<OrderPart> searchAll() {
@@ -31,11 +33,11 @@ public class OrderPartDAO implements DAO<OrderPart>{
     }
 
     @Override
-    public OrderPart searchById(String id) {
+    public OrderPart searchById(Object id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
         OrderPart orderPart = null;
         try {
-            orderPart = em.find(OrderPart.class, id);
+            orderPart = em.find(OrderPart.class, (Integer)id);
         } catch (Exception e) {
             System.err.println("Problems in OrderPartDAO.searchByUserId(): " + e);
         } finally {
@@ -63,7 +65,7 @@ public class OrderPartDAO implements DAO<OrderPart>{
     }
 
     @Override
-    public boolean update(String id, OrderPart editedOrderPart) {
+    public boolean update(Object id, OrderPart editedOrderPart) {
         OrderPart tmpOrderPart;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
@@ -72,8 +74,8 @@ public class OrderPartDAO implements DAO<OrderPart>{
             tmpOrderPart = em.merge(this.searchById(id));
             tmpOrderPart.setOrderPartPK(editedOrderPart.getOrderPartPK());
             tmpOrderPart.setPart(editedOrderPart.getPart());
-            tmpOrderPart.setProductOrder(editedOrderPart.getProductOrder());
             tmpOrderPart.setQuantity(editedOrderPart.getQuantity());
+            tmpOrderPart.setProductOrder(editedOrderPart.getProductOrder());
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println("Problems in OrderPartDAO.update(): " + e);
@@ -86,7 +88,7 @@ public class OrderPartDAO implements DAO<OrderPart>{
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         OrderPart delOrderPart = this.searchById(id);

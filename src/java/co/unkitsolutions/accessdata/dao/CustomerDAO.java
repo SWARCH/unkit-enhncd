@@ -33,11 +33,11 @@ public class CustomerDAO implements DAO<Customer>, Serializable {
     }
 
     @Override
-    public Customer searchById(String id) {
+    public Customer searchById(Object id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
         Customer customer = null;
         try {
-            customer = em.find(Customer.class, id);
+            customer = em.find(Customer.class, (Integer)id);
         } catch (Exception e) {
             System.err.println("Problems in CustomerDAO.searchByUserId(): " + e);
         } finally {
@@ -65,7 +65,7 @@ public class CustomerDAO implements DAO<Customer>, Serializable {
     }
 
     @Override
-    public boolean update(String id, Customer editedCustomer) {
+    public boolean update(Object id, Customer editedCustomer) {
         Customer tmpCustomer;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
@@ -86,7 +86,7 @@ public class CustomerDAO implements DAO<Customer>, Serializable {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         Customer delCustomer = this.searchById(id);

@@ -41,8 +41,6 @@ public class Employee implements Serializable {
     public static final String MANAGER_ROLE = "manager";
     public static final String MANUFACTURER_ROLE = "manufacturer";
     public static final String ASSEMBLER_ROLE = "assembler";
-    public static final Character FEMALE = 'F';
-    public static final Character MALE   = 'M';
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -74,9 +72,8 @@ public class Employee implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "userId")
-    private String userId;
+    private Integer userId;
     @JoinColumn(name = "userId", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private User user;
@@ -84,11 +81,11 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(String userId) {
+    public Employee(Integer userId) {
         this.userId = userId;
     }
 
-    public Employee(String userId, String name, Character gender, String role, double salary, String contractType, String contractStatus) {
+    public Employee(Integer userId, String name, Character gender, String role, double salary, String contractType, String contractStatus) {
         this.userId = userId;
         this.name = name;
         this.gender = gender;
@@ -146,11 +143,11 @@ public class Employee implements Serializable {
         this.contractStatus = contractStatus;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -184,7 +181,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.Employee[ userId=" + userId + " ]";
+        return "co.unkitsolutions.accessdata.entity.Employee[ userId=" + userId + " ]";
     }
     
 }

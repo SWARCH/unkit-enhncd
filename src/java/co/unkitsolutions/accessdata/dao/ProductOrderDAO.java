@@ -33,11 +33,11 @@ public class ProductOrderDAO implements DAO<ProductOrder>, Serializable {
     }
 
     @Override
-    public ProductOrder searchById(String id) {
+    public ProductOrder searchById(Object id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
         ProductOrder productOrder = null;
         try {
-            productOrder = em.find(ProductOrder.class, id);
+            productOrder = em.find(ProductOrder.class, (Integer)id);
         } catch (Exception e) {
             System.err.println("Problems in ProductOrderDAO.searchByUserId(): " + e);
         } finally {
@@ -48,6 +48,8 @@ public class ProductOrderDAO implements DAO<ProductOrder>, Serializable {
 
     @Override
     public boolean create(ProductOrder newProductOrder) {
+        System.out.println("ProductOrderDAO.create(): It is working!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("Data sended:" + newProductOrder);
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         em.getTransaction().begin();
@@ -65,7 +67,7 @@ public class ProductOrderDAO implements DAO<ProductOrder>, Serializable {
     }
 
     @Override
-    public boolean update(String id, ProductOrder editedProductOrder) {
+    public boolean update(Object id, ProductOrder editedProductOrder) {
         ProductOrder tmpProductOrder;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
@@ -82,10 +84,10 @@ public class ProductOrderDAO implements DAO<ProductOrder>, Serializable {
                     editedProductOrder.getDeliveryDate());
             tmpProductOrder.setOrderCost(
                     editedProductOrder.getOrderCost());
-            tmpProductOrder.setOrderPartCollection(
-                    editedProductOrder.getOrderPartCollection());
-            tmpProductOrder.setOrderVehicleCollection(
-                    editedProductOrder.getOrderVehicleCollection());
+            tmpProductOrder.setOrderPartList(
+                    editedProductOrder.getOrderPartList());
+            tmpProductOrder.setOrderVehicleList(
+                    editedProductOrder.getOrderVehicleList());
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println("Problems in ProductOrderDAO.update(): " + e);
@@ -98,7 +100,7 @@ public class ProductOrderDAO implements DAO<ProductOrder>, Serializable {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         ProductOrder delProductOrder = this.searchById(id);

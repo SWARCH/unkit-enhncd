@@ -85,7 +85,7 @@ public class RegisterCustomer extends HttpServlet {
         String passwordC = request.getParameter("passwordC");
 
         CustomerController customer = new CustomerController();
-        String message = customer.registerCustomer(usr, tradeName, id, type, password, passwordC);
+        String message = customer.registerCustomer(usr, tradeName, Integer.parseInt(id), type, password, passwordC);
 
         if (message.equals("Su cuenta se creó exitosamente")) {
             request.getRequestDispatcher("/login.jsp")

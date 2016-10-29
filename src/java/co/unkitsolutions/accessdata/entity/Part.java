@@ -6,16 +6,22 @@
 package co.unkitsolutions.accessdata.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,11 +41,10 @@ public class Part implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "id")
-    private String id;
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -54,25 +59,27 @@ public class Part implements Serializable {
     private double cost;
     @Column(name = "units")
     private Integer units;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "part")
+    private List<OrderPart> orderPartList;
 
     public Part() {
     }
 
-    public Part(String id) {
+    public Part(Integer id) {
         this.id = id;
     }
 
-    public Part(String id, String name, double cost) {
+    public Part(Integer id, String name, double cost) {
         this.id = id;
         this.name = name;
         this.cost = cost;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -106,6 +113,15 @@ public class Part implements Serializable {
 
     public void setUnits(Integer units) {
         this.units = units;
+    }
+
+    @XmlTransient
+    public List<OrderPart> getOrderPartList() {
+        return orderPartList;
+    }
+
+    public void setOrderPartList(List<OrderPart> orderPartList) {
+        this.orderPartList = orderPartList;
     }
 
     @Override

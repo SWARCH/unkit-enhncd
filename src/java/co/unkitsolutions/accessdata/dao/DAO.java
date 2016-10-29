@@ -15,9 +15,9 @@ import java.util.List;
 public interface DAO<T> {
     
     public List<T> searchAll();
-    public T searchById(String id);
+    public T searchById(Object id);
     public boolean create(T newObject);
-    public boolean update(String id, T editedObject);
-    public boolean delete(String id);
+    public boolean update(Object id, T editedObject);
+    public boolean delete(Object id);
     
 }

@@ -6,6 +6,7 @@
 package co.unkitsolutions.accessdata.dao;
 
 import co.unkitsolutions.accessdata.entity.OrderVehicle;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -13,7 +14,8 @@ import javax.persistence.EntityManager;
  *
  * @author mauricio
  */
-public class OrderVehicleDAO implements DAO<OrderVehicle>{
+public class OrderVehicleDAO implements DAO<OrderVehicle>, Serializable {
+    private static final long serialVersionUID = 1L;
     
     @Override
     public List<OrderVehicle> searchAll() {
@@ -31,11 +33,11 @@ public class OrderVehicleDAO implements DAO<OrderVehicle>{
     }
 
     @Override
-    public OrderVehicle searchById(String id) {
+    public OrderVehicle searchById(Object id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
         OrderVehicle orderVehicle = null;
         try {
-            orderVehicle = em.find(OrderVehicle.class, id);
+            orderVehicle = em.find(OrderVehicle.class, (Integer)id);
         } catch (Exception e) {
             System.err.println("Problems in OrderVehicleDAO.searchByUserId(): " + e);
         } finally {
@@ -63,7 +65,7 @@ public class OrderVehicleDAO implements DAO<OrderVehicle>{
     }
 
     @Override
-    public boolean update(String id, OrderVehicle editedOrderVehicle) {
+    public boolean update(Object id, OrderVehicle editedOrderVehicle) {
         OrderVehicle tmpOrderVehicle;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
@@ -72,8 +74,8 @@ public class OrderVehicleDAO implements DAO<OrderVehicle>{
             tmpOrderVehicle = em.merge(this.searchById(id));
             tmpOrderVehicle.setOrderVehiclePK(editedOrderVehicle.getOrderVehiclePK());
             tmpOrderVehicle.setVehicle(editedOrderVehicle.getVehicle());
-            tmpOrderVehicle.setProductOrder(editedOrderVehicle.getProductOrder());
             tmpOrderVehicle.setQuantity(editedOrderVehicle.getQuantity());
+            tmpOrderVehicle.setProductOrder(editedOrderVehicle.getProductOrder());
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println("Problems in OrderVehicleDAO.update(): " + e);
@@ -86,7 +88,7 @@ public class OrderVehicleDAO implements DAO<OrderVehicle>{
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         OrderVehicle delOrderVehicle = this.searchById(id);

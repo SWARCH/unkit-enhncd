@@ -32,11 +32,11 @@ public class EmployeeDAO implements DAO<Employee>, Serializable {
     }
 
     @Override
-    public Employee searchById(String id) {
+    public Employee searchById(Object id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
         Employee employee = null;
         try {
-            employee = em.find(Employee.class, id);
+            employee = em.find(Employee.class, (Integer)id);
         } catch (Exception e) {
             System.err.println("Problems in EmployeeDAO.searchByUserId(): " + e);
         } finally {
@@ -64,7 +64,7 @@ public class EmployeeDAO implements DAO<Employee>, Serializable {
     }
 
     @Override
-    public boolean update(String id, Employee editedEmployee) {
+    public boolean update(Object id, Employee editedEmployee) {
         Employee tmpEmployee;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
@@ -91,7 +91,7 @@ public class EmployeeDAO implements DAO<Employee>, Serializable {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         Employee delEmployee = this.searchById(id);

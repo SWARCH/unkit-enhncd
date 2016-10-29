@@ -12,13 +12,11 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,7 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OrderVehicle.findAll", query = "SELECT o FROM OrderVehicle o"),
     @NamedQuery(name = "OrderVehicle.findByOrderId", query = "SELECT o FROM OrderVehicle o WHERE o.orderVehiclePK.orderId = :orderId"),
     @NamedQuery(name = "OrderVehicle.findByCustomerId", query = "SELECT o FROM OrderVehicle o WHERE o.orderVehiclePK.customerId = :customerId"),
-    @NamedQuery(name = "OrderVehicle.findByVehicleId", query = "SELECT o FROM OrderVehicle o WHERE o.orderVehiclePK.vehicleId = :vehicleId")})
+    @NamedQuery(name = "OrderVehicle.findByVehicleId", query = "SELECT o FROM OrderVehicle o WHERE o.orderVehiclePK.vehicleId = :vehicleId"),
+    @NamedQuery(name = "OrderVehicle.findByQuantity", query = "SELECT o FROM OrderVehicle o WHERE o.quantity = :quantity")})
 public class OrderVehicle implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,10 +39,8 @@ public class OrderVehicle implements Serializable {
     protected OrderVehiclePK orderVehiclePK;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 16777215)
     @Column(name = "quantity")
-    private String quantity;
+    private int quantity;
     @JoinColumns({
         @JoinColumn(name = "orderId", referencedColumnName = "id", insertable = false, updatable = false),
         @JoinColumn(name = "customerId", referencedColumnName = "customerId", insertable = false, updatable = false)})
@@ -60,12 +57,12 @@ public class OrderVehicle implements Serializable {
         this.orderVehiclePK = orderVehiclePK;
     }
 
-    public OrderVehicle(OrderVehiclePK orderVehiclePK, String quantity) {
+    public OrderVehicle(OrderVehiclePK orderVehiclePK, int quantity) {
         this.orderVehiclePK = orderVehiclePK;
         this.quantity = quantity;
     }
 
-    public OrderVehicle(String orderId, String customerId, String vehicleId) {
+    public OrderVehicle(int orderId, int customerId, int vehicleId) {
         this.orderVehiclePK = new OrderVehiclePK(orderId, customerId, vehicleId);
     }
 
@@ -77,11 +74,11 @@ public class OrderVehicle implements Serializable {
         this.orderVehiclePK = orderVehiclePK;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -123,7 +120,7 @@ public class OrderVehicle implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.OrderVehicle[ orderVehiclePK=" + orderVehiclePK + " ]";
+        return "co.unkitsolutions.accessdata.entity.OrderVehicle[ orderVehiclePK=" + orderVehiclePK + " ]";
     }
     
 }

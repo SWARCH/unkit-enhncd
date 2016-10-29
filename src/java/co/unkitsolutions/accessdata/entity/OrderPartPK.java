@@ -10,7 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -20,60 +19,56 @@ import javax.validation.constraints.Size;
 public class OrderPartPK implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "orderId")
-    private String orderId;
+    private int orderId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "customerId")
-    private String customerId;
+    private int customerId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "partId")
-    private String partId;
+    private int partId;
 
     public OrderPartPK() {
     }
 
-    public OrderPartPK(String orderId, String customerId, String partId) {
+    public OrderPartPK(int orderId, int customerId, int partId) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.partId = partId;
     }
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
-    public String getPartId() {
+    public int getPartId() {
         return partId;
     }
 
-    public void setPartId(String partId) {
+    public void setPartId(int partId) {
         this.partId = partId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (orderId != null ? orderId.hashCode() : 0);
-        hash += (customerId != null ? customerId.hashCode() : 0);
-        hash += (partId != null ? partId.hashCode() : 0);
+        hash += (int) orderId;
+        hash += (int) customerId;
+        hash += (int) partId;
         return hash;
     }
 
@@ -84,13 +79,13 @@ public class OrderPartPK implements Serializable {
             return false;
         }
         OrderPartPK other = (OrderPartPK) object;
-        if ((this.orderId == null && other.orderId != null) || (this.orderId != null && !this.orderId.equals(other.orderId))) {
+        if (this.orderId != other.orderId) {
             return false;
         }
-        if ((this.customerId == null && other.customerId != null) || (this.customerId != null && !this.customerId.equals(other.customerId))) {
+        if (this.customerId != other.customerId) {
             return false;
         }
-        if ((this.partId == null && other.partId != null) || (this.partId != null && !this.partId.equals(other.partId))) {
+        if (this.partId != other.partId) {
             return false;
         }
         return true;
@@ -98,7 +93,7 @@ public class OrderPartPK implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.OrderPartPK[ orderId=" + orderId + ", customerId=" + customerId + ", partId=" + partId + " ]";
+        return "co.unkitsolutions.accessdata.entity.OrderPartPK[ orderId=" + orderId + ", customerId=" + customerId + ", partId=" + partId + " ]";
     }
     
 }

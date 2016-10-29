@@ -6,7 +6,7 @@
 package co.unkitsolutions.accessdata.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,8 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final String WHOLESALER_TYPE = "wholesaler";
     public static final String ASSEMBLER_TYPE = "assembler";
+    public static final String WHOLESALER_TYPE = "wholesaler";
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -53,11 +54,10 @@ public class Customer implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "userId")
-    private String userId;
+    private Integer userId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private Collection<ProductOrder> productOrderCollection;
+    private List<ProductOrder> productOrderList;
     @JoinColumn(name = "userId", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private User user;
@@ -65,11 +65,11 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Customer(String userId) {
+    public Customer(Integer userId) {
         this.userId = userId;
     }
 
-    public Customer(String userId, String tradeName, String type) {
+    public Customer(Integer userId, String tradeName, String type) {
         this.userId = userId;
         this.tradeName = tradeName;
         this.type = type;
@@ -91,21 +91,21 @@ public class Customer implements Serializable {
         this.type = type;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     @XmlTransient
-    public Collection<ProductOrder> getProductOrderCollection() {
-        return productOrderCollection;
+    public List<ProductOrder> getProductOrderList() {
+        return productOrderList;
     }
 
-    public void setProductOrderCollection(Collection<ProductOrder> productOrderCollection) {
-        this.productOrderCollection = productOrderCollection;
+    public void setProductOrderList(List<ProductOrder> productOrderList) {
+        this.productOrderList = productOrderList;
     }
 
     public User getUser() {
@@ -138,7 +138,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.Customer[ userId=" + userId + " ]";
+        return "co.unkitsolutions.accessdata.entity.Customer[ userId=" + userId + " ]";
     }
     
 }

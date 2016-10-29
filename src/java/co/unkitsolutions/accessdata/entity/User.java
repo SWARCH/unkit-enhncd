@@ -6,6 +6,7 @@
 package co.unkitsolutions.accessdata.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,11 +14,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,9 +40,8 @@ public class User implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "id")
-    private String id;
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -50,6 +52,8 @@ public class User implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "password")
     private String password;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<GroupTable> groupTableList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Employee employee;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
@@ -58,21 +62,21 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id) {
+    public User(Integer id) {
         this.id = id;
     }
 
-    public User(String id, String username, String password) {
+    public User(Integer id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -90,6 +94,15 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @XmlTransient
+    public List<GroupTable> getGroupTableList() {
+        return groupTableList;
+    }
+
+    public void setGroupTableList(List<GroupTable> groupTableList) {
+        this.groupTableList = groupTableList;
     }
 
     public Employee getEmployee() {
@@ -130,7 +143,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "dataAccess.entity.User[ id=" + id + " ]";
+        return "co.unkitsolutions.accessdata.entity.User[ id=" + id + " ]";
     }
     
 }

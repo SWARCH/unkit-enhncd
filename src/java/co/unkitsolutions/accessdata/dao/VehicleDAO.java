@@ -34,11 +34,11 @@ public class VehicleDAO implements DAO<Vehicle>, Serializable {
     }
 
     @Override
-    public Vehicle searchById(String id) {
+    public Vehicle searchById(Object id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
         Vehicle vehicle = null;
         try {
-            vehicle = em.find(Vehicle.class, id);
+            vehicle = em.find(Vehicle.class, (Integer)id);
         } catch (Exception e) {
             System.err.println("Problems in VehicleDAO.searchByUserId(): " + e);
         } finally {
@@ -66,13 +66,13 @@ public class VehicleDAO implements DAO<Vehicle>, Serializable {
     }
 
     @Override
-    public boolean update(String id, Vehicle editedVehicle) {
+    public boolean update(Object id, Vehicle editedVehicle) {
         Vehicle tmpVehicle;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
         em.getTransaction().begin();
         try {
-            tmpVehicle = em.merge(this.searchById(id));
+            tmpVehicle = em.merge(this.searchById((Integer)id));
             tmpVehicle.setCost(editedVehicle.getCost());
             tmpVehicle.setDescription(editedVehicle.getDescription());
             tmpVehicle.setUnits(editedVehicle.getUnits());
@@ -88,7 +88,7 @@ public class VehicleDAO implements DAO<Vehicle>, Serializable {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         Vehicle delVehicle = this.searchById(id);

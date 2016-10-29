@@ -16,7 +16,7 @@ import co.unkitsolutions.accessdata.entity.User;
  */
 public class CustomerController {
 
-    public String registerCustomer(String userName, String tradeName, String id, String type, String password, String passwordC) {
+    public String registerCustomer(String userName, String tradeName, Integer id, String type, String password, String passwordC) {
 
         User user = new User();
         Customer customer = new Customer();

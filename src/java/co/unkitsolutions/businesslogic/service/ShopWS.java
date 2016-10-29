@@ -17,15 +17,20 @@ import javax.jws.WebMethod;
 @WebService(serviceName = "ShopWS")
 public class ShopWS {
 
-    @WebMethod(operationName = "buyPart")
-    public ResponseMessage buyPart(String id, int quantity) {
+    @WebMethod(operationName = "dataTest")
+    public ResponseMessage dataTest(Integer custId, Integer partId, Integer quantity) {
         Shop shop = new Shop();
-        return shop.buyPart(id, quantity);
+        return shop.dataTest(custId, partId, quantity);
+    }
+    @WebMethod(operationName = "buyPart")
+    public ResponseMessage buyPart(Integer custId, Integer partId, Integer quantity) {
+        Shop shop = new Shop();
+        return shop.buyPart(custId, partId, quantity);
     }
     
     @WebMethod(operationName = "buyVehicle")
-    public ResponseMessage buyVehicle(String id, int quantity) {
+    public ResponseMessage buyVehicle(Integer custId, Integer vehicleId, Integer quantity) {
         Shop shop = new Shop();
-        return shop.buyVehicle(id, quantity);
+        return shop.buyVehicle(custId, vehicleId, quantity);
     }
 }

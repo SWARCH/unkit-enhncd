@@ -33,11 +33,11 @@ public class PartDAO implements DAO<Part>, Serializable {
     }
 
     @Override
-    public Part searchById(String id) {
+    public Part searchById(Object id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
         Part part = null;
         try {
-            part = em.find(Part.class, id);
+            part = em.find(Part.class, (Integer)id);
         } catch (Exception e) {
             System.err.println("Problems in PartDAO.searchByUserId(): " + e);
         } finally {
@@ -65,7 +65,7 @@ public class PartDAO implements DAO<Part>, Serializable {
     }
 
     @Override
-    public boolean update(String id, Part editedPart) {
+    public boolean update(Object id, Part editedPart) {
         Part tmpPart;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
@@ -88,7 +88,7 @@ public class PartDAO implements DAO<Part>, Serializable {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         Part delPart = this.searchById(id);

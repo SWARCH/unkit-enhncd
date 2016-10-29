@@ -9,7 +9,6 @@ import co.unkitsolutions.accessdata.entity.User;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -55,11 +54,11 @@ public class UserDAO implements DAO<User>, Serializable {
     }
 
     @Override
-    public User searchById(String id) {
+    public User searchById(Object id) {
         EntityManager em = EntityManagerProvider.createEntityManager();
         User user = null;
         try {
-            user = em.find(User.class, id);
+            user = em.find(User.class, (Integer)id);
         } catch (Exception e) {
             System.err.println("Problems in UserDAO.searchById(): " + e);
         } finally {
@@ -105,7 +104,7 @@ public class UserDAO implements DAO<User>, Serializable {
     }
 
     @Override
-    public boolean update(String id, User editedUser) {
+    public boolean update(Object id, User editedUser) {
         User tmpUser;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
@@ -131,7 +130,7 @@ public class UserDAO implements DAO<User>, Serializable {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
         User delUser = this.searchById(id);

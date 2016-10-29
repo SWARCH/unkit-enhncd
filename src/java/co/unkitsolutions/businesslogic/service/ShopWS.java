@@ -17,11 +17,6 @@ import javax.jws.WebMethod;
 @WebService(serviceName = "ShopWS")
 public class ShopWS {
 
-    @WebMethod(operationName = "dataTest")
-    public ResponseMessage dataTest(Integer custId, Integer partId, Integer quantity) {
-        Shop shop = new Shop();
-        return shop.dataTest(custId, partId, quantity);
-    }
     @WebMethod(operationName = "buyPart")
     public ResponseMessage buyPart(Integer custId, Integer partId, Integer quantity) {
         Shop shop = new Shop();
@@ -33,4 +28,6 @@ public class ShopWS {
         Shop shop = new Shop();
         return shop.buyVehicle(custId, vehicleId, quantity);
     }
+    
+    
 }

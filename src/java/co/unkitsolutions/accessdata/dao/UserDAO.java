@@ -19,6 +19,7 @@ public class UserDAO implements DAO<User>, Serializable {
     private static final long serialVersionUID = 1L;
     
     public User searchValidUser(String username, String password) {
+        System.out.println("Searching valid username: " + username + ", password: " + password);
         EntityManager entityManager = 
                 EntityManagerProvider.createEntityManager();
         User retrievedUser = null;
@@ -29,12 +30,14 @@ public class UserDAO implements DAO<User>, Serializable {
                 .setParameter("username", username)
                 .setParameter("password", password);
             retrievedUser = (User) query.getSingleResult();
+            System.out.println("Retrieved user:" + retrievedUser);
         } catch(Exception e) {
+            System.out.println("Problema en UserDAO: " + e);
             e.printStackTrace();
         } finally {
             entityManager.close();
         }
-        
+        System.out.println("Retrieved user:" + retrievedUser);
         return retrievedUser;
     }
 

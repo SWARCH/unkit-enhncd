@@ -31,10 +31,8 @@ public class Shop implements Serializable {
     private static final long serialVersionUID = 1L;
 
     
-    public ResponseMessage dataTest(Integer custId, Integer partId, Integer quantity) {
+    public ResponseMessage buyPart(Integer custId, Integer partId, Integer quantity) {
         ResponseMessage responseMessage = new ResponseMessage();
-        //ProductOrderPK productOrderPK = new ProductOrderPK(0, 0);
-        //ProductOrder productOrder = new ProductOrder(productOrderPK, date);
         
         Part part = new Part();
         PartDAO partDAO = new PartDAO();
@@ -48,11 +46,25 @@ public class Shop implements Serializable {
         responseMessage.setData(part.getCost()*quantity);
         return responseMessage ;
     }
-
-    public ResponseMessage buyPart(Integer custId, Integer partId, Integer quantity) {
+    
+    public ResponseMessage buyVehicle(Integer custId, Integer vehicleId, Integer quantity) {
         ResponseMessage responseMessage = new ResponseMessage();
-        //ProductOrderPK productOrderPK = new ProductOrderPK(0, 0);
-        //ProductOrder productOrder = new ProductOrder(productOrderPK, date);
+        
+        Vehicle vehicle = new Vehicle();
+        VehicleDAO vehicleDAO = new VehicleDAO();
+        vehicle = vehicleDAO.searchById(vehicleId);
+        
+        if (vehicle.getUnits() - quantity >= 0){
+               vehicle.setUnits(vehicle.getUnits() - quantity);
+                vehicleDAO.update(vehicleId, vehicle);
+            responseMessage.setSuccess(true);
+        }
+        responseMessage.setData(vehicle.getCost()*quantity);
+        return responseMessage;
+    }
+
+    public ResponseMessage buyPart_(Integer custId, Integer partId, Integer quantity) {
+        ResponseMessage responseMessage = new ResponseMessage();
         
         Part part = new Part();
         PartDAO partDAO = new PartDAO();
@@ -86,32 +98,6 @@ public class Shop implements Serializable {
         
         return responseMessage;
     }
-
-    public ResponseMessage buyVehicle(Integer custId, Integer vehicleId, Integer quantity) {
-        ResponseMessage responseMessage = new ResponseMessage();
-
-        Vehicle vehicle = new Vehicle();
-        VehicleDAO vehicleDAO = new VehicleDAO();
-        vehicle = vehicleDAO.searchById(vehicleId);
-        if (vehicle.getUnits() - quantity > 0) {
-        
-            OrderVehicle orderVehicle = new OrderVehicle();
-            orderVehicle.setOrderVehiclePK(new OrderVehiclePK((int)(Math.random()*100),
-                    custId,
-                    vehicleId));
-            orderVehicle.setQuantity(quantity);
-            OrderVehicleDAO orderVehicleDAO = new OrderVehicleDAO();
-
-            responseMessage.setSuccess(orderVehicleDAO.create(orderVehicle));
-            if (responseMessage.isSuccess()) {
-                vehicle.setUnits(vehicle.getUnits() - quantity);
-                vehicleDAO.update(vehicleId, vehicle);
-            }
-        }else{
-            responseMessage.setSuccess(false);
-        }
-            return responseMessage;
-        }
     
     public Date addDays(Date date) {
         int delivaryDays = 5;

@@ -84,6 +84,7 @@ public class LoginServlet extends HttpServlet {
         String pwd = request.getParameter("pwd");
         UserDAO userDAO = new UserDAO();
         User user = userDAO.searchValidUser(usr, pwd);
+        System.out.println("!!!!!!!!!!!!!!!!!!User:" + user);
         if (user != null) {
             CustomerDAO customerDAO = new CustomerDAO();
             EmployeeDAO employeeDAO = new EmployeeDAO();

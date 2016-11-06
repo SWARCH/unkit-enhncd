@@ -14,20 +14,18 @@ import javax.jws.WebMethod;
  *
  * @author mauricio
  */
-@WebService(serviceName = "ShopWS")
-public class ShopWS {
+@WebService(serviceName = "VehicleSellerWS")
+public class VehicleSellerWS {
 
-    @WebMethod(operationName = "buyPart")
-    public ResponseMessage buyPart(Integer custId, Integer partId, Integer quantity) {
-        Shop shop = new Shop();
-        return shop.buyPart(custId, partId, quantity);
-    }
-    
     @WebMethod(operationName = "buyVehicle")
     public ResponseMessage buyVehicle(Integer custId, Integer vehicleId, Integer quantity) {
         Shop shop = new Shop();
-        return shop.buyVehicle(custId, vehicleId, quantity);
+        System.out.println("Web Service: custId =" + custId + ", partId =" + vehicleId + ", q = " + quantity);
+        ResponseMessage success = shop.buyVehicle(custId, vehicleId, quantity); 
+        System.out.println("ResponseMessage = " + success.isSuccess());
+        return success; 
     }
     
     
+        
 }

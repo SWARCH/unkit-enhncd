@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-    <service name="ShopWS">
-      <implementation-class>co.unkitsolutions.businesslogic.service.ShopWS</implementation-class>
+    <service name="PartSellerWS">
+      <implementation-class>co.unkitsolutions.businesslogic.service.PartSellerWS</implementation-class>
+    </service>
+    <service name="VehicleSellerWS">
+      <implementation-class>co.unkitsolutions.businesslogic.service.VehicleSellerWS</implementation-class>
     </service>
   </services>
   <clients/>

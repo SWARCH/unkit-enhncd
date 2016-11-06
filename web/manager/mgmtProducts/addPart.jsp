@@ -34,11 +34,7 @@
                     <div class="row text-center">
                         <h3>Agregar una parte</h3>
                     </div>
-                    <form action="AddPart" method="post">
-                        <div class="form-group">
-                            <label for="inputId">Referencia</label>
-                            <input class="form-control" type="text" name="id">
-                        </div>
+                    <form action="../../addPartServlet" method="post">
                         <div class="form-group">
                             <label for="inputName">Nombre</label>
                             <input class="form-control" type="text" name="name">

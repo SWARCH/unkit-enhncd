@@ -5,11 +5,10 @@
  */
 package co.unkitsolutions.servlets;
 
-import co.unkitsolutions.businesslogic.controller.CustomerController;
+import co.unkitsolutions.businesslogic.controller.VehicleController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lorenags
  */
-@WebServlet(name = "RegisterCustomer", urlPatterns = {"/RegisterCustomer"})
-public class RegisterCustomer extends HttpServlet {
+public class AddVehicleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +32,16 @@ public class RegisterCustomer extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            /* out.println("<!DOCTYPE html>");
-             out.println("<html>");
-             out.println("<head>");
-             out.println("<title>Servlet RegisterCustomer</title>");            
-             out.println("</head>");
-             out.println("<body>");
-             out.println("<h1>Servlet RegisterCustomer at " + request.getContextPath() + "</h1>");
-             out.println("</body>");
-             out.println("</html>");*/
+            /* TODO output your page here. You may use following sample code. 
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddVehicleServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddVehicleServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");*/
         }
     }
 
@@ -73,22 +71,24 @@ public class RegisterCustomer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usr = request.getParameter("user");
-        String tradeName = request.getParameter("tradeName");
-        String id = request.getParameter("id");
-        String type = request.getParameter("type");
-        String password = request.getParameter("password");
-        String passwordC = request.getParameter("passwordC");
-
-        CustomerController customer = new CustomerController();
-        String message = customer.registerCustomer(usr, tradeName, Integer.parseInt(id), type, password, passwordC);
-
-        if (message.equals("Su cuenta se creó exitosamente")) {
-            request.getRequestDispatcher("/login.jsp")
+        String tradeMark = request.getParameter("tradeMark");
+        String model = request.getParameter("model");
+        String description = request.getParameter("description");
+        String color = request.getParameter("color");
+        String cost = request.getParameter("cost");
+        String units = request.getParameter("units");
+        
+        VehicleController vehicle= new VehicleController();
+                
+        int idVehicle = vehicle.addVehicle(tradeMark,model,description,color,cost,units);
+        
+        if (idVehicle != 0){
+            request.setAttribute("error", "Se agregó el vehículo exitosamente, el número de referencia es:" + idVehicle);
+            request.getRequestDispatcher("/manager/mgmtProducts/addVehicle.jsp")
                     .forward(request, response);
-        } else {
-            request.setAttribute("error", message);
-            request.getRequestDispatcher("/registerCustomer.jsp")
+        }else{
+            request.setAttribute("error", "Ocurrió un error, verifique la información");
+            request.getRequestDispatcher("/manager/mgmtProducts/addVehicle.jsp")
                     .forward(request, response);
         }
     }

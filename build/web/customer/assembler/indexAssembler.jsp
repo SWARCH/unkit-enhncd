@@ -32,7 +32,9 @@
             <div class="row">
                 <a class="btn btn-default" href="customer/assembler/partsShop.jsp" role="button">Tienda</a>
                 <a class="btn btn-default" href="/showParts" role="button">Invocar Servlet</a>
-                <a class="btn btn-default" href="/logout" role="button">Salir</a>
+                <form action="${pageContext.request.contextPath}/logout" method="post">
+                    <input type="submit" value="Logout" />
+                </form>
             </div>
         </div>
 

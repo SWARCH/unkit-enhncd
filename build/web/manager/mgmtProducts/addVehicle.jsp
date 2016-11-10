@@ -34,11 +34,7 @@
                     <div class="row text-center">
                         <h3>Agregar un vehículo</h3>
                     </div>
-                    <form action="AddVehicle" method="post">
-                        <div class="form-group">
-                            <label for="inputId">Referencia</label>
-                            <input class="form-control" type="text" name="id">
-                        </div>
+                    <form action="../../addVehicleServlet" method="post">
                         <div class="form-group">
                             <label for="inputTradeMark">Marca</label>
                             <input class="form-control" type="text" name="tradeMark">

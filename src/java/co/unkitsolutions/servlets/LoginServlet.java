@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static co.unkitsolutions.accessdata.entity.Customer.*;
 import static co.unkitsolutions.accessdata.entity.Employee.*;
+import co.unkitsolutions.businesslogic.controller.LoginLdapController;
 
 /**
  *
@@ -71,6 +72,7 @@ public class LoginServlet extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -136,7 +138,6 @@ public class LoginServlet extends HttpServlet {
             //request.getRequestDispatcher("/error.jsp")
             //        .forward(request, response);
         }
-        
     }
 
     /**

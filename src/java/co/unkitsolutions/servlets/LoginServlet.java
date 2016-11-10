@@ -20,12 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 import static co.unkitsolutions.accessdata.entity.Customer.*;
 import static co.unkitsolutions.accessdata.entity.Employee.*;
 import co.unkitsolutions.businesslogic.controller.LoginLdapController;
+import java.io.Serializable;
 
 /**
  *
  * @author mauricio
  */
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

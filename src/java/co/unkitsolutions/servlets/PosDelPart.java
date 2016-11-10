@@ -8,6 +8,7 @@ package co.unkitsolutions.servlets;
 import co.unkitsolutions.accessdata.entity.Part;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -21,7 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author mauricio
  */
 @WebServlet(name = "PosDelPart", urlPatterns = {"/posDelPart"})
-public class PosDelPart extends HttpServlet {
+public class PosDelPart extends HttpServlet implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

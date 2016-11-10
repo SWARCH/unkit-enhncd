@@ -27,7 +27,6 @@ import java.util.GregorianCalendar;
  * @author mauricio
  */
 public class Shop implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     

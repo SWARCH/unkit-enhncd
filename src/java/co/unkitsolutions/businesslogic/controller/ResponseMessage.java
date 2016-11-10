@@ -5,11 +5,14 @@
  */
 package co.unkitsolutions.businesslogic.controller;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mauricio
  */
-public class ResponseMessage {
+public class ResponseMessage implements Serializable {
+    private static final long serialVersionUID = 1L;
     private boolean success;
     private String errorMessage;
     private Double data;

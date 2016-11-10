@@ -9,13 +9,14 @@ import co.unkitsolutions.accessdata.dao.CustomerDAO;
 import co.unkitsolutions.accessdata.dao.UserDAO;
 import co.unkitsolutions.accessdata.entity.Customer;
 import co.unkitsolutions.accessdata.entity.User;
+import java.io.Serializable;
 
 /**
  *
  * @author lorenags
  */
-public class CustomerController {
-
+public class CustomerController implements Serializable {
+    private static final long serialVersionUID = 1L;
     public String registerCustomer(String userName, String tradeName, Integer id, String type, String password, String passwordC) {
 
         User user = new User();

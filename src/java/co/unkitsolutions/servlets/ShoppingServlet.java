@@ -7,6 +7,7 @@ package co.unkitsolutions.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author mauricio
  */
 @WebServlet(name = "ShoppingServlet", urlPatterns = {"/shoppingServlet"})
-public class ShoppingServlet extends HttpServlet {
+public class ShoppingServlet extends HttpServlet implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

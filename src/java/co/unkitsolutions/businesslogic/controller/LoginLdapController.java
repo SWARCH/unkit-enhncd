@@ -7,14 +7,15 @@ package co.unkitsolutions.businesslogic.controller;
 
 import com.novell.ldap.LDAPConnection;
 import com.novell.ldap.LDAPException;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 /**
  *
  * @author lorenags
  */
-public class LoginLdapController {
-    
+public class LoginLdapController implements Serializable {
+    private static final long serialVersionUID = 1L;
     private LDAPConnection lc = new LDAPConnection();
 
     public String login(String user, String password){
@@ -59,10 +60,10 @@ public class LoginLdapController {
 
         try {
             lc.bind(dn, password);
-            System.out.println("==== ContraseÃ±a validada ====");
+            System.out.println("==== Contraseña validada ====");
             return true;
         } catch (LDAPException ex) {
-            System.out.println("==== ERROR al validar la contraseÃ±a ====");
+            System.out.println("==== ERROR al validar la contraseña ====");
             return false;
         }
     }    

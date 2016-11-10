@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unkitsolutions.servlets;
 
 import co.unkitsolutions.businesslogic.controller.LoginLdapController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lorenags
  */
-public class LoginLdapServlet extends HttpServlet {
+public class LoginLdapServlet extends HttpServlet implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +42,6 @@ public class LoginLdapServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

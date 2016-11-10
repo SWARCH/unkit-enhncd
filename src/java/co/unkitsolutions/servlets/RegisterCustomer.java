@@ -8,6 +8,7 @@ package co.unkitsolutions.servlets;
 import co.unkitsolutions.businesslogic.controller.CustomerController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author lorenags
  */
 @WebServlet(name = "RegisterCustomer", urlPatterns = {"/RegisterCustomer"})
-public class RegisterCustomer extends HttpServlet {
+public class RegisterCustomer extends HttpServlet implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

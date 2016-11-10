@@ -7,13 +7,14 @@ package co.unkitsolutions.businesslogic.controller;
 
 import co.unkitsolutions.accessdata.dao.PartDAO;
 import co.unkitsolutions.accessdata.entity.Part;
+import java.io.Serializable;
 
 /**
  *
  * @author lorenags
  */
-public class PartController {
-    
+public class PartController implements Serializable {
+    private static final long serialVersionUID = 1L;
     public int addPart(String name, String description, String cost, String units){
                 
         Part part = new Part();

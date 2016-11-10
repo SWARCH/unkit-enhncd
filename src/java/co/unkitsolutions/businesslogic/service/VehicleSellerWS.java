@@ -7,6 +7,7 @@ package co.unkitsolutions.businesslogic.service;
 
 import co.unkitsolutions.businesslogic.controller.ResponseMessage;
 import co.unkitsolutions.businesslogic.controller.Shop;
+import java.io.Serializable;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 
@@ -15,7 +16,8 @@ import javax.jws.WebMethod;
  * @author mauricio
  */
 @WebService(serviceName = "VehicleSellerWS")
-public class VehicleSellerWS {
+public class VehicleSellerWS implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @WebMethod(operationName = "buyVehicle")
     public ResponseMessage buyVehicle(Integer custId, Integer vehicleId, Integer quantity) {

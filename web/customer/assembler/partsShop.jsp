@@ -26,6 +26,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="shop_script.js"></script>
+        
         <title>Tienda de partes</title>
     </head>
     <body>
@@ -63,6 +66,7 @@
                         </tr>
                         <%
                             int j = 0;
+                            int q = 0;
                             for (Part p : allParts) {
                         %>
                         <tr>
@@ -71,13 +75,13 @@
                             <td><%=p.getDescription()%></td>
                             <td>$<%=p.getCost()%></td>
                             <td><%=p.getUnits()%></td>
-                            <td><form action="posAddPart" method ="post">
+                            <td><form action="/partShop.jsp" method ="post">
                                     <input class="form-control" type="number" name="quantity">
-                                    <button type="submit" class="btn btn-default">Guardar</button>
+                                    <a href="${pageContext.request.contextPath}/posAddPart?index=<%=j++%>?quantity=<%=q++%>">Agregar</a>
                                 </form>
                             </td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/posAddPart?index=<%=j++%>">Agregar</a>
+                                
                             </td>
                         </tr>
 
@@ -95,6 +99,7 @@
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Costo</th>
+                            <th>Cantidad pedida</th>
                             <th>*</th>
                         </tr>
                         <%  if (partsToBuy != null && partsToBuy.size() != 0) {
@@ -106,6 +111,7 @@
                             <td><%= partsToBuy.get(i).getName()%></td>
                             <td><%= partsToBuy.get(i).getDescription()%></td>
                             <td><%= partsToBuy.get(i).getCost()%></td>
+                            <td><%= q%></td> <!-- put the quantity -->
                             <td><a href="posDelPart?pos=<%=k++%>">Borrar</a></td>
                         </tr>
 

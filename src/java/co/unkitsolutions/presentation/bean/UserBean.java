@@ -5,6 +5,7 @@
  */
 package co.unkitsolutions.presentation.bean;
 
+import java.io.Serializable;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 
@@ -12,7 +13,8 @@ import javax.ejb.SessionContext;
  * A simple bean for the User entity
  * @author mauricio
  */
-public class UserBean {
+public class UserBean implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String username;
     private String password;
     @Resource

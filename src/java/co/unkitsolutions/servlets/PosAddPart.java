@@ -4,6 +4,7 @@ import co.unkitsolutions.accessdata.dao.PartDAO;
 import co.unkitsolutions.accessdata.entity.Part;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -17,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author mauricio
  */
 @WebServlet(name = "PosAddPart", urlPatterns = {"/posAddPart"})
-public class PosAddPart extends HttpServlet {
+public class PosAddPart extends HttpServlet implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer q;
 
     /**
@@ -70,7 +72,8 @@ public class PosAddPart extends HttpServlet {
         System.out.println("index = " + index);
         Part buyedPart = allParts.get(index);
         
-        partsToBuy.add(buyedPart);
+        if (!partsToBuy.contains(buyedPart))
+            partsToBuy.add(buyedPart);
         System.out.println("partsToBuy" + partsToBuy);
         buyedPart.setUnits(buyedPart.getUnits() - 1); // To correct later
         request.getRequestDispatcher("/customer/assembler/partsShop.jsp")

@@ -8,6 +8,7 @@ package co.unkitsolutions.servlets;
 import co.unkitsolutions.businesslogic.controller.PartController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lorenags
  */
-public class AddPartServlet extends HttpServlet {
+public class AddPartServlet extends HttpServlet implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

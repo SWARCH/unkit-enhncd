@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
  * @author mauricio
  */
 public class EmployeeDAO implements DAO<Employee>, Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Override
     public List<Employee> searchAll() {

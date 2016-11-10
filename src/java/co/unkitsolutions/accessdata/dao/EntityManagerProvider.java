@@ -5,6 +5,7 @@
  */
 package co.unkitsolutions.accessdata.dao;
 
+import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,7 +14,8 @@ import javax.persistence.Persistence;
  * A factory that returns the EntityManager object.
  * @author mauricio
  */
-public class EntityManagerProvider {
+public class EntityManagerProvider implements Serializable {
+    private static final long serialVersionUID = 1L;
     public static final String LOCAL_PERSISTENCE_UNIT  = "UNKITLPU";
     public static final String REMOTE_PERSISTENCE_UNIT = "UNKITRPU";
     

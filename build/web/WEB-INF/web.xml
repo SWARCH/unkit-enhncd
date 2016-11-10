@@ -21,6 +21,10 @@
         <servlet-name>AddVehicleServlet</servlet-name>
         <servlet-class>co.unkitsolutions.servlets.AddVehicleServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginLdapServlet</servlet-name>
+        <servlet-class>co.unkitsolutions.servlets.LoginLdapServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -36,6 +40,10 @@
     <servlet-mapping>
         <servlet-name>AddVehicleServlet</servlet-name>
         <url-pattern>/addVehicleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginLdapServlet</servlet-name>
+        <url-pattern>/loginLdapServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -53,4 +61,5 @@
         <description/>
         <role-name>ADMIN</role-name>
     </security-role>
+    <distributable/>
 </web-app>

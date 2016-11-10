@@ -9,6 +9,7 @@ import co.unkitsolutions.accessdata.dao.PartDAO;
 import co.unkitsolutions.accessdata.entity.Part;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author mauricio
  */
 @WebServlet(name = "ShowParts", urlPatterns = {"/showParts"})
-public class ShowParts extends HttpServlet {
+public class ShowParts extends HttpServlet implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

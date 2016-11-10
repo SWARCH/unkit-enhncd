@@ -5,6 +5,7 @@
  */
 package co.unkitsolutions.servlets;
 
+import java.io.Serializable;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -15,7 +16,8 @@ import javax.servlet.http.HttpSessionListener;
  * @author mauricio
  */
 @WebListener
-public class MySessionListener implements HttpSessionListener {
+public class MySessionListener implements HttpSessionListener, Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {

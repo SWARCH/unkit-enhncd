@@ -46,7 +46,9 @@
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">
                     <div class="row text-center">
-                        <h3>Tienda de ensambladores</h3>
+                        <h3>Actualizar partes</h3>
+                        <p>Seleccione la parte que desea actualizar</p>
+                        <br/>
                     </div>
 
 
@@ -64,7 +66,7 @@
                             for (Part p : allParts) {
                         %>
                         <tr>
-                            <td><a href="/manager/mgmtProducts/updatePartS.jsp"><%=p.getId()%></a></td>
+                            <td><a href="${pageContext.request.contextPath}/updatePartServlet?idPart=<%=j++%>" ><%=p.getId()%></a></td>
                             <td><%=p.getName()%></td>
                             <td><%=p.getDescription()%></td>
                             <td>$<%=p.getCost()%></td>

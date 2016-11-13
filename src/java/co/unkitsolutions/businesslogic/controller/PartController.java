@@ -7,12 +7,16 @@ package co.unkitsolutions.businesslogic.controller;
 
 import co.unkitsolutions.accessdata.dao.PartDAO;
 import co.unkitsolutions.accessdata.entity.Part;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author lorenags
  */
 public class PartController {
+    
+    public static int idUpdatePart;
     
     public int addPart(String name, String description, String cost, String units){
                 
@@ -33,4 +37,17 @@ public class PartController {
         }
     }
     
+    public void setIdPart(int idPart){
+        PartDAO partDAO = new PartDAO();
+        List<Part> allParts = partDAO.searchAll();
+        Part updatePart = allParts.get(idPart);
+        System.out.println("ID PART :D-------- = " + updatePart.getId());
+        idUpdatePart = updatePart.getId();
+        
+        System.out.println("PARTE: " +idUpdatePart);
+    }
+    
+    public int getIdPart(){
+        return idUpdatePart;
+    }
 }

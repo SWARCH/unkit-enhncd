@@ -37,13 +37,7 @@ public class PartController {
     }
     
     public void setIdPart(int idPart){
-        PartDAO partDAO = new PartDAO();
-        List<Part> allParts = partDAO.searchAll();
-        Part updatePart = allParts.get(idPart);
-        System.out.println("ID PART :D-------- = " + updatePart.getId());
-        idUpdatePart = updatePart.getId();
-        
-        System.out.println("PARTE: " + idUpdatePart);
+        idUpdatePart = idPart;
     }
     
     public int getIdPart(){

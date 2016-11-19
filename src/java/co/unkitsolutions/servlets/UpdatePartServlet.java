@@ -5,13 +5,9 @@
  */
 package co.unkitsolutions.servlets;
 
-import co.unkitsolutions.accessdata.dao.PartDAO;
-import co.unkitsolutions.accessdata.entity.Part;
 import co.unkitsolutions.businesslogic.controller.PartController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +57,6 @@ public class UpdatePartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         System.out.println("ESTOY EN DOGET________________________---------------");
         
         int idPart = Integer.parseInt(request.getParameter("idPart"));
@@ -69,7 +64,6 @@ public class UpdatePartServlet extends HttpServlet {
         
         PartController partController = new PartController();
         partController.setIdPart(idPart);
-        
         
         request.getRequestDispatcher("/manager/mgmtProducts/updatePartS.jsp")
                 .forward(request, response);

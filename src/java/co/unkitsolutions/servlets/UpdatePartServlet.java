@@ -91,7 +91,7 @@ public class UpdatePartServlet extends HttpServlet {
 
         int idPart = part.updatePart(name, description, cost, units);
 
-        if (idPart != 0) {
+        if (idPart >= 0) {
             request.setAttribute("error", "La parte de referencia " + idPart + " se ha actualizado correctamente");
             request.getRequestDispatcher("/manager/mgmtProducts/updatePartS.jsp")
                     .forward(request, response);

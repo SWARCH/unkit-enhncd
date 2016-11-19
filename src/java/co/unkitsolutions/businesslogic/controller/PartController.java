@@ -59,6 +59,23 @@ public class PartController {
             return 0;
         }
     }
+    
+    public boolean deletePart(int idPart){
+        
+       System.out.println("DELETE PART");
+       boolean isSuccesfull = false;
+       PartDAO partDAO = new PartDAO();
+        /*List<Part> parts;
+        parts = partDAO.searchAll();
+        int idPart = parts.get(idDeletePart).getId();*/
+
+        if (partDAO.delete(idPart) == true) {
+            isSuccesfull = true;
+            return isSuccesfull;
+        } 
+        
+        return isSuccesfull;
+    }
 
     public void setIdPart(int idPart) {
         idUpdatePart = idPart;

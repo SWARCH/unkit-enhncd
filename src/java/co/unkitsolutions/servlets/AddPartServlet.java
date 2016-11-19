@@ -60,7 +60,22 @@ public class AddPartServlet extends HttpServlet implements Serializable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("ESTOY EN DOGET________________________ADD PART SERVLET");
+
+        int idPart = Integer.parseInt(request.getParameter("idPart"));
+        System.out.println("idPart = " + idPart);
+
+        PartController partController = new PartController();
+
+        if (partController.deletePart(idPart) == true) {
+            request.setAttribute("error", "La parte de referencia " + idPart + " se ha eliminado correctamente");
+            request.getRequestDispatcher("/manager/mgmtProducts/updatePart.jsp")
+                    .forward(request, response);
+        } else {
+            request.setAttribute("error", "Ocurrió un error, verifique la información");
+            request.getRequestDispatcher("/manager/mgmtProducts/updatePart.jsp")
+                    .forward(request, response);
+        }
     }
 
     /**

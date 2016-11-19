@@ -65,6 +65,20 @@ public class VehicleController implements Serializable {
             return 0;
         }
     }
+    
+    public boolean deleteVehicle(int idVehicle) {
+
+        System.out.println("DELETE Vehicle");
+        boolean isSuccesfull = false;
+        VehicleDAO vehicleDAO = new VehicleDAO();
+        
+        if (vehicleDAO.delete(idVehicle) == true) {
+            isSuccesfull = true;
+            return isSuccesfull;
+        }
+
+        return isSuccesfull;
+    }
 
     public void setIdVehicle(int idVehicle) {
         idUpdateVehicle = idVehicle;

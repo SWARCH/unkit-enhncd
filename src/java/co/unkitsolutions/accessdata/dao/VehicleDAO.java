@@ -94,9 +94,10 @@ public class VehicleDAO implements DAO<Vehicle>, Serializable {
     public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
-        Vehicle delVehicle = this.searchById(id);
+        Vehicle delVehicle;
         em.getTransaction().begin();
         try {
+            delVehicle = em.merge(this.searchById(id));
             em.remove(delVehicle);
             em.getTransaction().commit();
             isSuccessful = true;

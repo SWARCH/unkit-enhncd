@@ -77,19 +77,19 @@
                         <div class="item active">
                             <img src="images/assembler1.jpg" alt="Slide 1">
                             <div class="carousel-caption">
-                                caption 1
+                                Nuevo Orden Mundial
                             </div>
                         </div>
                         <div class="item">
                             <img src="images/car1.jpg" alt="Slide 2">
                             <div class="carousel-caption">
-                                caption 2
+                                Dominación Global
                             </div>
                         </div>
                         <div class="item">
                             <img src="images/employee_team.jpg" alt="Slide 3">
                             <div class="carousel-caption">
-                                caption 3
+                                Control de la raza humana
                             </div>
                         </div>
                     </div>

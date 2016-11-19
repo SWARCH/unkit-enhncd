@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <title>JSP Page</title>
+        <title>Ingreso al sistema</title>
     </head>
     <body>
         <div class="container">
@@ -49,6 +49,12 @@
                     </form>
                 </div>
             </div> <!--End login form-->
+
+            <!-- FOOTER -->
+            <footer>
+                <p class="pull-right"><a href="./index.jsp">Back to top</a></p>
+                <p>&copy; 2016 Unkit Solutions Ltda.  &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+            </footer>
 
         </div>
     </body>

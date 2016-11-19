@@ -97,7 +97,7 @@ public class AddPartServlet extends HttpServlet implements Serializable {
 
         PartController part = new PartController();
 
-        int idPart = part.updatePart(name, description, cost, units);
+        int idPart = part.addPart(name, description, cost, units);
 
         if (idPart != 0) {
             request.setAttribute("error", "Se agregó la parte exitosamente, el número de referencia es:" + idPart);

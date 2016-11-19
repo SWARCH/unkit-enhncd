@@ -34,7 +34,7 @@
 
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
-                    <img src="images/unkit-logo.jpg">
+                    <img src="<%=request.getContextPath()%>/images/unkit-logo.jpg">
                 </div>
                 <div class="col-md-6 text-right text-uppercase">
                     <h1>UN KIT Solutions Ltda.</h1>

@@ -22,6 +22,7 @@ public class PartController {
         Part part = new Part();
 
         part.setId(part.hashCode());
+        System.out.println("ID NUEVO: " + part.hashCode());
         part.setName(name);
         part.setDescription(description);
         part.setCost(Double.parseDouble(cost));
@@ -54,7 +55,7 @@ public class PartController {
         int idPart = parts.get(idUpdatePart).getId();
 
         if (partDAO.update(idPart, part) == true) {
-            return part.getId();
+            return idPart;
         } else {
             return 0;
         }

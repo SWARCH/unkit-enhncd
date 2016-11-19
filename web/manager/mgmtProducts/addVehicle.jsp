@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <title>JSP Page</title>
     </head>
     <body>
@@ -19,7 +20,7 @@
 
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
-                    <img src="../../images/unkit-logo.jpg">
+                    <img src="<%=request.getContextPath()%>/images/unkit-logo.jpg">
                 </div>
                 <div class="col-md-6 text-right text-uppercase">
                     <h1>UN KIT Solutions Ltda.</h1>

@@ -11,13 +11,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     PartDAO partDAO = new PartDAO();
-    List<Part> partsToBuy;
     List<Part> allParts;
 
-    partsToBuy = (ArrayList) request.getSession().getAttribute("partsToBuy");
     allParts = partDAO.searchAll();
-    System.out.print("partsShop.partsToBuy " + partsToBuy);
-    System.out.print("partsShop.allParts " + allParts);
 %>
 <!DOCTYPE html>
 <html>

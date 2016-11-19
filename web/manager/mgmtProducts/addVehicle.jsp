@@ -30,6 +30,15 @@
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
 
+            <div class="masthead">
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li class="active"><a href="../indexManager.jsp">Inicio</a></li>
+                        <li><a href="<%=request.getContextPath()%>/manager/mgmtProducts/updateVehicle.jsp">Volver</a></li>
+                    </ul>
+                </nav>
+            </div>
+
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">
                     <div class="row text-center">

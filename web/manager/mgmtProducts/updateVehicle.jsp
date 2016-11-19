@@ -66,14 +66,14 @@
                             for (Vehicle v : allVehicles) {
                         %>
                         <tr>
-                            <td><a href="${pageContext.request.contextPath}/updatePartServlet?idPart=<%=j++%>" ><%=v.getId()%></a></td>
+                            <td><a href="${pageContext.request.contextPath}/updateVehicleServlet?idVehicle=<%=j++%>" ><%=v.getId()%></a></td>
                             <td><%=v.getTrademark()%></td>
                             <td><%=v.getModel()%></td>
                             <td><%=v.getDescription()%></td>
                             <td><%=v.getColor()%></td>
                             <td>$<%=v.getCost()%></td>
                             <td><%=v.getUnits()%></td>
-                            <td><a href="${pageContext.request.contextPath}/addPartServlet?idPart=<%=v.getId()%>" >Eliminar</a></td>
+                            <td><a href="${pageContext.request.contextPath}/addVehicleServlet?idVehicle=<%=v.getId()%>" >Eliminar</a></td>
                         </tr>
 
                         <%

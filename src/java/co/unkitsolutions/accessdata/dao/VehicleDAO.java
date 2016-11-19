@@ -5,7 +5,6 @@
  */
 package co.unkitsolutions.accessdata.dao;
 
-import co.unkitsolutions.accessdata.entity.Part;
 import co.unkitsolutions.accessdata.entity.Vehicle;
 import java.io.Serializable;
 import java.util.List;
@@ -73,8 +72,12 @@ public class VehicleDAO implements DAO<Vehicle>, Serializable {
         em.getTransaction().begin();
         try {
             tmpVehicle = em.merge(this.searchById((Integer)id));
-            tmpVehicle.setCost(editedVehicle.getCost());
+            tmpVehicle.setTrademark(editedVehicle.getTrademark());
+            tmpVehicle.setModel(editedVehicle.getModel());
             tmpVehicle.setDescription(editedVehicle.getDescription());
+            tmpVehicle.setColor(editedVehicle.getColor());
+            tmpVehicle.setCost(editedVehicle.getCost());
+            
             tmpVehicle.setUnits(editedVehicle.getUnits());
             em.getTransaction().commit();
         } catch (Exception e) {

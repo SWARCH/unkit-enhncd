@@ -7,14 +7,16 @@ package co.unkitsolutions.businesslogic.controller;
 
 import co.unkitsolutions.accessdata.dao.PartDAO;
 import co.unkitsolutions.accessdata.entity.Part;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author lorenags
  */
-public class PartController {
+public class PartController implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     public static int idUpdatePart;
 
     public int addPart(String name, String description, String cost, String units) {
@@ -40,9 +42,9 @@ public class PartController {
     public int updatePart(String name, String description, String cost, String units) {
 
         System.out.println("UPDATE PART");
-        
+
         Part part = new Part();
-        
+
         part.setId(idUpdatePart);
         part.setName(name);
         part.setDescription(description);
@@ -60,21 +62,18 @@ public class PartController {
             return 0;
         }
     }
-    
-    public boolean deletePart(int idPart){
-        
-       System.out.println("DELETE PART");
-       boolean isSuccesfull = false;
-       PartDAO partDAO = new PartDAO();
-        /*List<Part> parts;
-        parts = partDAO.searchAll();
-        int idPart = parts.get(idDeletePart).getId();*/
 
+    public boolean deletePart(int idPart) {
+
+        System.out.println("DELETE PART");
+        boolean isSuccesfull = false;
+        PartDAO partDAO = new PartDAO();
+        
         if (partDAO.delete(idPart) == true) {
             isSuccesfull = true;
             return isSuccesfull;
-        } 
-        
+        }
+
         return isSuccesfull;
     }
 

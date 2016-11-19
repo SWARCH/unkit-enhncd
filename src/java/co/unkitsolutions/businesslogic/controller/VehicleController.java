@@ -8,13 +8,17 @@ package co.unkitsolutions.businesslogic.controller;
 import co.unkitsolutions.accessdata.dao.VehicleDAO;
 import co.unkitsolutions.accessdata.entity.Vehicle;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author lorenags
  */
 public class VehicleController implements Serializable {
+
     private static final long serialVersionUID = 1L;
+    public static int idUpdateVehicle;
+
     public int addVehicle(String tradeMark, String model, String description, String color, String cost, String units) {
 
         Vehicle vehicle = new Vehicle();
@@ -34,5 +38,39 @@ public class VehicleController implements Serializable {
         } else {
             return 0;
         }
+    }
+
+    public int updateVehicle(String tradeMark, String model, String description, String color, String cost, String units) {
+        System.out.println("UPDATE Vehicle");
+        System.out.println("ESTE ES EL COLOR controlador: " + color);
+        
+        Vehicle vehicle = new Vehicle();
+
+        vehicle.setId(idUpdateVehicle);
+        vehicle.setTrademark(tradeMark);
+        vehicle.setModel(Integer.parseInt(model));
+        vehicle.setDescription(description);
+        vehicle.setColor(color);
+        vehicle.setCost(Double.parseDouble(cost));
+        vehicle.setUnits(Integer.parseInt(units));
+
+        VehicleDAO vehicleDAO = new VehicleDAO();
+        List<Vehicle> vehicles;
+        vehicles = vehicleDAO.searchAll();
+        int idVehicle = vehicles.get(idUpdateVehicle).getId();
+
+        if (vehicleDAO.update(idVehicle, vehicle) == true) {
+            return idVehicle;
+        } else {
+            return 0;
+        }
+    }
+
+    public void setIdVehicle(int idVehicle) {
+        idUpdateVehicle = idVehicle;
+    }
+
+    public int getIdVehicle() {
+        return idUpdateVehicle;
     }
 }

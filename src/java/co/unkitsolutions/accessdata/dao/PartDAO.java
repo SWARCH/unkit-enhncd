@@ -74,8 +74,8 @@ public class PartDAO implements DAO<Part>, Serializable {
         try {
             tmpPart = em.merge(this.searchById(id));
             tmpPart.setName(editedPart.getName());
-            tmpPart.setCost(editedPart.getCost());
             tmpPart.setDescription(editedPart.getDescription());
+            tmpPart.setCost(editedPart.getCost());
             tmpPart.setUnits(editedPart.getUnits());
             em.getTransaction().commit();
         } catch (Exception e) {

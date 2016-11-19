@@ -51,7 +51,12 @@
                             <label for="ce_">Salario: </label>
                             $<%= currentEmployee.getSalary() %>
                         </div>
-                        <a href="employee/changePassword.jsp" class="btn btn-default">Cambiar contraseña</a>
+                        <div class="form-group">
+                            <label for="ce_">Estado del contrato: </label>
+                            <%= currentEmployee.getContractStatus() %>
+                        </div>
+                        <a href="#" class="btn btn-default">Cambiar contraseña</a>
+                        <a href="${pageContext.request.contextPath}/quitJobServlet?quit=true">Renunciar</a>
                         <br><br>
                         <span class="error">${error}</span>
                     </form>

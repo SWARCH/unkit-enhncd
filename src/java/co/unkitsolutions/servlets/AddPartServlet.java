@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author lorenags
  */
 public class AddPartServlet extends HttpServlet implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -35,15 +36,15 @@ public class AddPartServlet extends HttpServlet implements Serializable {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. 
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddPartServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddPartServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");*/
+             out.println("<!DOCTYPE html>");
+             out.println("<html>");
+             out.println("<head>");
+             out.println("<title>Servlet AddPartServlet</title>");            
+             out.println("</head>");
+             out.println("<body>");
+             out.println("<h1>Servlet AddPartServlet at " + request.getContextPath() + "</h1>");
+             out.println("</body>");
+             out.println("</html>");*/
         }
     }
 
@@ -73,21 +74,21 @@ public class AddPartServlet extends HttpServlet implements Serializable {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         String cost = request.getParameter("cost");
         String units = request.getParameter("units");
-        
-        PartController part= new PartController();
-                
-        int idPart = part.addPart(name, description, cost, units);
-        
-        if (idPart != 0){
+
+        PartController part = new PartController();
+
+        int idPart = part.updatePart(name, description, cost, units);
+
+        if (idPart != 0) {
             request.setAttribute("error", "Se agregó la parte exitosamente, el número de referencia es:" + idPart);
             request.getRequestDispatcher("/manager/mgmtProducts/addPart.jsp")
                     .forward(request, response);
-        }else{
+        } else {
             request.setAttribute("error", "Ocurrió un error, verifique la información");
             request.getRequestDispatcher("/manager/mgmtProducts/addPart.jsp")
                     .forward(request, response);

@@ -50,7 +50,7 @@
                         <h3>Actualizar una parte</h3>
                     </div>
                     
-                    <form action="../../addPartServlet" method="post">
+                    <form action="updatePartServlet" method="post">
                         <div class="form-group">
                             <label for="inputName">Nombre</label>
                             <input class="form-control" type="text" name="name" value=<%=part.get(idPart).getName()%> >

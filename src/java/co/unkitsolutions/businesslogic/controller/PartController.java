@@ -14,33 +14,57 @@ import java.util.List;
  * @author lorenags
  */
 public class PartController {
-    
+
     public static int idUpdatePart;
-    
-    public int addPart(String name, String description, String cost, String units){
-                
+
+    public int addPart(String name, String description, String cost, String units) {
+
         Part part = new Part();
-        
+
         part.setId(part.hashCode());
         part.setName(name);
         part.setDescription(description);
         part.setCost(Double.parseDouble(cost));
         part.setUnits(Integer.parseInt(units));
-        
+
         PartDAO partDAO = new PartDAO();
-        
-        if (partDAO.create(part)== true){
+
+        if (partDAO.create(part) == true) {
             return part.getId();
-        }else{
+        } else {
             return 0;
         }
     }
-    
-    public void setIdPart(int idPart){
+
+    public int updatePart(String name, String description, String cost, String units) {
+
+        System.out.println("UPDATE PART");
+        
+        Part part = new Part();
+        
+        part.setId(idUpdatePart);
+        part.setName(name);
+        part.setDescription(description);
+        part.setCost(Double.parseDouble(cost));
+        part.setUnits(Integer.parseInt(units));
+
+        PartDAO partDAO = new PartDAO();
+        List<Part> parts;
+        parts = partDAO.searchAll();
+        int idPart = parts.get(idUpdatePart).getId();
+
+        if (partDAO.update(idPart, part) == true) {
+            return part.getId();
+        } else {
+            return 0;
+        }
+    }
+
+    public void setIdPart(int idPart) {
         idUpdatePart = idPart;
     }
-    
-    public int getIdPart(){
+
+    public int getIdPart() {
         return idUpdatePart;
     }
 }

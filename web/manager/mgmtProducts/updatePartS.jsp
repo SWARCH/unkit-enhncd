@@ -1,7 +1,7 @@
 <%-- 
-    Document   : addPart
-    Created on : Oct 20, 2016, 9:02:11 AM
-    Author     : mauricio
+    Document   : updatePartS
+    Created on : 12/11/2016, 09:21:08 PM
+    Author     : lorenags
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <title>Creación de partes</title>
+        <title>Actualización de partes</title>
     </head>
     <body>
         <div class="container">
@@ -32,7 +32,7 @@
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">
                     <div class="row text-center">
-                        <h3>Agregar una parte</h3>
+                        <h3>Actualizar una parte</h3>
                     </div>
                     <form action="../../addPartServlet" method="post">
                         <div class="form-group">

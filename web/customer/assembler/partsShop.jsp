@@ -77,7 +77,7 @@
                             <td><%=p.getUnits()%></td>
                             <td><form action="/partShop.jsp" method ="post">
                                     <input class="form-control" type="number" name="quantity">
-                                    <a href="${pageContext.request.contextPath}/posAddPart?index=<%=j++%>?quantity=<%=q++%>">Agregar</a>
+                                    <a href="${pageContext.request.contextPath}/posAddPart?index=<%=j++%>&quantity=<%=q%>">Agregar</a>
                                 </form>
                             </td>
                             <td>
@@ -110,7 +110,7 @@
                             <td><%= partsToBuy.get(i).getId()%></td>
                             <td><%= partsToBuy.get(i).getName()%></td>
                             <td><%= partsToBuy.get(i).getDescription()%></td>
-                            <td><%= partsToBuy.get(i).getCost()%></td>
+                            <td>$<%= partsToBuy.get(i).getCost()%></td>
                             <td><%= q%></td> <!-- put the quantity -->
                             <td><a href="posDelPart?pos=<%=k++%>">Borrar</a></td>
                         </tr>

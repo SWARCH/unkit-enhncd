@@ -80,9 +80,6 @@
                         <div class="caption">
                             <h3><a href="<%=request.getContextPath()%>/manager/mgmtProducts/updateVehicle.jsp">Gestionar vehículos</a></h3>
                             <p>Aqui puede usted realizar la gestión de las partes.</p>
-                            <p><!--a href="#" class="btn btn-primary" role="button">Button</a> -->
-                                <a href="manager/mgmtProducts/addVehicle.jsp" class="btn btn-default" role="button">Adicionar</a>
-                            </p>
                         </div>
                     </div>
                 </div>

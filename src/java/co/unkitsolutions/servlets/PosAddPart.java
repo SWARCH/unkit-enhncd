@@ -61,9 +61,12 @@ public class PosAddPart extends HttpServlet implements Serializable {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("Enter pos add");
+        
         PartDAO partDAO = new PartDAO();
         List<Part> partsToBuy = (ArrayList<Part>) request.getSession().getAttribute("partsToBuy");
         List<Part> allParts = partDAO.searchAll();
+        int[] cartData = new int[allParts.size()];
+        
         
         System.out.println("partsToBuy " + partsToBuy);
         System.out.println("allParts " + allParts);
@@ -71,6 +74,8 @@ public class PosAddPart extends HttpServlet implements Serializable {
         int index = Integer.parseInt(request.getParameter("index"));
         System.out.println("index = " + index);
         Part buyedPart = allParts.get(index);
+        cartData[index] += 1;
+        request.getSession().setAttribute("q", cartData[index]);
         
         if (!partsToBuy.contains(buyedPart))
             partsToBuy.add(buyedPart);

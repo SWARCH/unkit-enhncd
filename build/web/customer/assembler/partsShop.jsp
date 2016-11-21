@@ -36,7 +36,7 @@
 
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
-                    <img src="../../images/unkit-logo.jpg">
+                    <img src="images/unkit-logo.jpg">
                 </div>
                 <div class="col-md-6 text-right text-uppercase">
                     <h1>UN KIT Solutions Ltda.</h1>
@@ -68,6 +68,7 @@
                             int j = 0;
                             int q = 0;
                             for (Part p : allParts) {
+                                
                         %>
                         <tr>
                             <td><%=p.getId()%></td>
@@ -76,8 +77,7 @@
                             <td>$<%=p.getCost()%></td>
                             <td><%=p.getUnits()%></td>
                             <td><form action="/partShop.jsp" method ="post">
-                                    <input class="form-control" type="number" name="quantity">
-                                    <a href="${pageContext.request.contextPath}/posAddPart?index=<%=j++%>&quantity=<%=q%>">Agregar</a>
+                                    <a href="${pageContext.request.contextPath}/posAddPart?index=<%=j++%>">Agregar</a>
                                 </form>
                             </td>
                             <td>
@@ -107,6 +107,7 @@
                                 for (int i = 0; i < partsToBuy.size(); i++) {
                         %>
                         <tr>
+                            <% q = Integer.parseInt((String)request.getSession().getAttribute("q"));%>
                             <td><%= partsToBuy.get(i).getId()%></td>
                             <td><%= partsToBuy.get(i).getName()%></td>
                             <td><%= partsToBuy.get(i).getDescription()%></td>

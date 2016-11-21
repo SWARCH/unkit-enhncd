@@ -16,7 +16,7 @@
         <title>Empleados</title>
     </head>
     <body>
-        <% Employee currentEmployee = (Employee)request.getSession().getAttribute("employee"); %>
+        <% Employee currentEmployee = (Employee) request.getSession().getAttribute("employee"); %>
         <div class="container">
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
@@ -29,13 +29,27 @@
             </div>
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
-            
-            <!-- Generates a greeting depending on the gender. Cool! -->
-            <% if (request.getSession().getAttribute("employeeGender").equals('F')) {%>
-            <h1> Bienvenida <%= request.getSession().getAttribute("employeeName")%> </h1>
-            <% } else {%>
-            <h1> Bienvenido <%= request.getSession().getAttribute("employeeName")%> </h1>
-            <% }%>
+
+            <!-- The justified navigation menu is meant for single line per list item.
+           Multiple lines will require custom code not provided by Bootstrap. -->
+            <div class="masthead">
+                <!-- Generates a greeting depending on the gender. Cool! -->
+                <% if (request.getSession().getAttribute("employeeGender").equals('F')) {%>
+                <h1> Bienvenida <%= request.getSession().getAttribute("employeeName")%> </h1>
+                <% } else {%>
+                <h1> Bienvenido <%= request.getSession().getAttribute("employeeName")%> </h1>
+                <% }%>
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li class="active"><a href="index.jsp">Home</a></li>
+                        <li><a href="#">Manual del empleado</a></li>
+                        <li><a href="#">Manual técnico</a></li>
+                        <li><a href="#">Terminos de uso</a></li>
+                        <li><a href="#">Contacta a tu patrón</a></li>
+                    </ul>
+                </nav>
+            </div>
+
 
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">
@@ -45,15 +59,15 @@
                     <form action="loginServlet" method="post">
                         <div class="form-group">
                             <label for="ce_username">Nombre de usuario: </label>
-                            <%= currentEmployee.getName() %>
+                            <%= currentEmployee.getName()%>
                         </div>
                         <div class="form-group">
                             <label for="ce_">Salario: </label>
-                            $<%= currentEmployee.getSalary() %>
+                            $<%= currentEmployee.getSalary()%>
                         </div>
                         <div class="form-group">
                             <label for="ce_">Estado del contrato: </label>
-                            <%= currentEmployee.getContractStatus() %>
+                            <%= currentEmployee.getContractStatus()%>
                         </div>
                         <a href="#" class="btn btn-default">Cambiar contraseña</a>
                         <a href="${pageContext.request.contextPath}/quitJobServlet?quit=true">Renunciar</a>

@@ -25,6 +25,10 @@
         <servlet-name>LoginLdapServlet</servlet-name>
         <servlet-class>co.unkitsolutions.servlets.LoginLdapServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePartServlet</servlet-name>
+        <servlet-class>co.unkitsolutions.servlets.UpdatePartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -44,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>LoginLdapServlet</servlet-name>
         <url-pattern>/loginLdapServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePartServlet</servlet-name>
+        <url-pattern>/updatePartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

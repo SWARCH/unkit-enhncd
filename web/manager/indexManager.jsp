@@ -27,6 +27,8 @@
             </div>
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
+            
+            
 
             <!-- Generates a greeting depending on the gender. Cool! -->
             <% if (request.getSession().getAttribute("employeeGender").equals('F')) {%>

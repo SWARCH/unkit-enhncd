@@ -11,6 +11,7 @@
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <title>Creación de partes</title>
     </head>
@@ -19,7 +20,7 @@
 
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
-                    <img src="../../images/unkit-logo.jpg">
+                    <img src="<%=request.getContextPath()%>/images/unkit-logo.jpg">
                 </div>
                 <div class="col-md-6 text-right text-uppercase">
                     <h1>UN KIT Solutions Ltda.</h1>
@@ -28,6 +29,15 @@
             </div>
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
+
+            <div class="masthead">
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li class="active"><a href="../indexManager.jsp">Inicio</a></li>
+                        <li><a href="<%=request.getContextPath()%>/manager/mgmtProducts/updatePart.jsp">Volver</a></li>
+                    </ul>
+                </nav>
+            </div>
 
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">

@@ -36,7 +36,7 @@ public class UpdatePartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdatePartServlet</title>");            
+            out.println("<title>Servlet UpdatePartServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UpdatePartServlet at " + request.getContextPath() + "</h1>");
@@ -58,13 +58,13 @@ public class UpdatePartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("ESTOY EN DOGET________________________---------------");
-        
+
         int idPart = Integer.parseInt(request.getParameter("idPart"));
         System.out.println("idPart = " + idPart);
-        
+
         PartController partController = new PartController();
         partController.setIdPart(idPart);
-        
+
         request.getRequestDispatcher("/manager/mgmtProducts/updatePartS.jsp")
                 .forward(request, response);
     }
@@ -80,7 +80,26 @@ public class UpdatePartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        System.out.println("ENTRE A DOPOST -------------------UPDATE---------------------");
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String cost = request.getParameter("cost");
+        String units = request.getParameter("units");
+
+        PartController part = new PartController();
+
+        int idPart = part.updatePart(name, description, cost, units);
+
+        if (idPart >= 0) {
+            request.setAttribute("error", "La parte de referencia " + idPart + " se ha actualizado correctamente");
+            request.getRequestDispatcher("/manager/mgmtProducts/updatePart.jsp")
+                    .forward(request, response);
+        } else {
+            request.setAttribute("error", "Ocurrió un error, verifique la información");
+            request.getRequestDispatcher("/manager/mgmtProducts/updatePartS.jsp")
+                    .forward(request, response);
+        }
     }
 
     /**

@@ -7,40 +7,81 @@ package co.unkitsolutions.businesslogic.controller;
 
 import co.unkitsolutions.accessdata.dao.PartDAO;
 import co.unkitsolutions.accessdata.entity.Part;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author lorenags
  */
-public class PartController {
-    
+public class PartController implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     public static int idUpdatePart;
-    
-    public int addPart(String name, String description, String cost, String units){
-                
+
+    public int addPart(String name, String description, String cost, String units) {
+
         Part part = new Part();
-        
+
         part.setId(part.hashCode());
+        System.out.println("ID NUEVO: " + part.hashCode());
         part.setName(name);
         part.setDescription(description);
         part.setCost(Double.parseDouble(cost));
         part.setUnits(Integer.parseInt(units));
-        
+
         PartDAO partDAO = new PartDAO();
-        
-        if (partDAO.create(part)== true){
+
+        if (partDAO.create(part) == true) {
             return part.getId();
-        }else{
+        } else {
             return 0;
         }
     }
-    
-    public void setIdPart(int idPart){
+
+    public int updatePart(String name, String description, String cost, String units) {
+
+        System.out.println("UPDATE PART");
+
+        Part part = new Part();
+
+        part.setId(idUpdatePart);
+        part.setName(name);
+        part.setDescription(description);
+        part.setCost(Double.parseDouble(cost));
+        part.setUnits(Integer.parseInt(units));
+
+        PartDAO partDAO = new PartDAO();
+        List<Part> parts;
+        parts = partDAO.searchAll();
+        int idPart = parts.get(idUpdatePart).getId();
+
+        if (partDAO.update(idPart, part) == true) {
+            return idPart;
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean deletePart(int idPart) {
+
+        System.out.println("DELETE PART");
+        boolean isSuccesfull = false;
+        PartDAO partDAO = new PartDAO();
+        
+        if (partDAO.delete(idPart) == true) {
+            isSuccesfull = true;
+            return isSuccesfull;
+        }
+
+        return isSuccesfull;
+    }
+
+    public void setIdPart(int idPart) {
         idUpdatePart = idPart;
     }
-    
-    public int getIdPart(){
+
+    public int getIdPart() {
         return idUpdatePart;
     }
 }

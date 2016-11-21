@@ -5,10 +5,9 @@
  */
 package co.unkitsolutions.servlets;
 
-import co.unkitsolutions.businesslogic.controller.VehicleController;
+import co.unkitsolutions.businesslogic.controller.EmployeeController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lorenags
  */
-public class AddVehicleServlet extends HttpServlet implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class AddEmployeeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +32,16 @@ public class AddVehicleServlet extends HttpServlet implements Serializable {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. 
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddVehicleServlet</title>");            
+            out.println("<title>Servlet AddEmployeeServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddVehicleServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddEmployeeServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
-            out.println("</html>");*/
+            out.println("</html>");
         }
     }
 
@@ -59,22 +57,7 @@ public class AddVehicleServlet extends HttpServlet implements Serializable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("ESTOY EN DOGET________________________ADD PART SERVLET");
-
-        int idVehicle = Integer.parseInt(request.getParameter("idVehicle"));
-        System.out.println("idVehicle = " + idVehicle);
-
-        VehicleController vehicleController = new VehicleController();
-
-        if (vehicleController.deleteVehicle(idVehicle) == true) {
-            request.setAttribute("error", "La parte de referencia " + idVehicle + " se ha eliminado correctamente");
-            request.getRequestDispatcher("/manager/mgmtProducts/updateVehicle.jsp")
-                    .forward(request, response);
-        } else {
-            request.setAttribute("error", "Ocurrió un error, verifique la información");
-            request.getRequestDispatcher("/manager/mgmtProducts/updateVehicle.jsp")
-                    .forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -88,24 +71,25 @@ public class AddVehicleServlet extends HttpServlet implements Serializable {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String tradeMark = request.getParameter("tradeMark");
-        String model = request.getParameter("model");
-        String description = request.getParameter("description");
-        String color = request.getParameter("color");
-        String cost = request.getParameter("cost");
-        String units = request.getParameter("units");
-        
-        VehicleController vehicle= new VehicleController();
-                
-        int idVehicle = vehicle.addVehicle(tradeMark,model,description,color,cost,units);
-        
-        if (idVehicle != 0){
-            request.setAttribute("error", "Se agregó el vehículo exitosamente, el número de referencia es:" + idVehicle);
-            request.getRequestDispatcher("/manager/mgmtProducts/addVehicle.jsp")
+        String usr = request.getParameter("user");
+        String name = request.getParameter("name");
+        String id = request.getParameter("id");
+        String gender = request.getParameter("gender");
+        String role = request.getParameter("role");
+        String contractType = request.getParameter("contractType");
+        String salary = request.getParameter("salary");
+        String password = request.getParameter("password");
+        String passwordC = request.getParameter("passwordC");
+
+        EmployeeController employee = new EmployeeController();
+        String message = employee.addEmployee(usr,name,id,gender,role,contractType,salary,password,passwordC);
+
+        if (message.equals("La cuenta del empleado se creó exitosamente")) {
+            request.getRequestDispatcher("/manager/indexManager.jsp")
                     .forward(request, response);
-        }else{
-            request.setAttribute("error", "Ocurrió un error, verifique la información");
-            request.getRequestDispatcher("/manager/mgmtProducts/addVehicle.jsp")
+        } else {
+            request.setAttribute("error", message);
+            request.getRequestDispatcher("/manager/mgmtEmployees/hireEmployee.jsp")
                     .forward(request, response);
         }
     }

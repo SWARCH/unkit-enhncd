@@ -34,7 +34,7 @@
 
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
-                    <img src="images/unkit-logo.jpg">
+                    <img src="<%=request.getContextPath()%>/images/unkit-logo.jpg">
                 </div>
                 <div class="col-md-6 text-right text-uppercase">
                     <h1>UN KIT Solutions Ltda.</h1>
@@ -50,7 +50,7 @@
                         <h3>Actualizar una parte</h3>
                     </div>
                     
-                    <form action="../../addPartServlet" method="post">
+                    <form action="updatePartServlet" method="post">
                         <div class="form-group">
                             <label for="inputName">Nombre</label>
                             <input class="form-control" type="text" name="name" value=<%=part.get(idPart).getName()%> >

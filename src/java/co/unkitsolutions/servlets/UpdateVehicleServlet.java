@@ -8,8 +8,8 @@ package co.unkitsolutions.servlets;
 import co.unkitsolutions.businesslogic.controller.VehicleController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lorenags
  */
-public class AddVehicleServlet extends HttpServlet implements Serializable {
-    private static final long serialVersionUID = 1L;
+@WebServlet(name = "UpdateVehicleServlet", urlPatterns = {"/updateVehicleServlet"})
+public class UpdateVehicleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,16 +34,16 @@ public class AddVehicleServlet extends HttpServlet implements Serializable {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. 
+            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddVehicleServlet</title>");            
+            out.println("<title>Servlet UpdateVehicleServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddVehicleServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateVehicleServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
-            out.println("</html>");*/
+            out.println("</html>");
         }
     }
 
@@ -59,22 +59,16 @@ public class AddVehicleServlet extends HttpServlet implements Serializable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("ESTOY EN DOGET________________________ADD PART SERVLET");
+        System.out.println("ESTOY EN DOGET________________________---------------");
 
         int idVehicle = Integer.parseInt(request.getParameter("idVehicle"));
         System.out.println("idVehicle = " + idVehicle);
 
         VehicleController vehicleController = new VehicleController();
+        vehicleController.setIdVehicle(idVehicle);
 
-        if (vehicleController.deleteVehicle(idVehicle) == true) {
-            request.setAttribute("error", "La parte de referencia " + idVehicle + " se ha eliminado correctamente");
-            request.getRequestDispatcher("/manager/mgmtProducts/updateVehicle.jsp")
-                    .forward(request, response);
-        } else {
-            request.setAttribute("error", "Ocurrió un error, verifique la información");
-            request.getRequestDispatcher("/manager/mgmtProducts/updateVehicle.jsp")
-                    .forward(request, response);
-        }
+        request.getRequestDispatcher("/manager/mgmtProducts/updateVehicleS.jsp")
+                .forward(request, response);
     }
 
     /**
@@ -88,24 +82,26 @@ public class AddVehicleServlet extends HttpServlet implements Serializable {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("ENTRE A DOPOST -------------------UPDATE---------------------");
         String tradeMark = request.getParameter("tradeMark");
         String model = request.getParameter("model");
         String description = request.getParameter("description");
         String color = request.getParameter("color");
+        System.out.println("ESTE ES EL COLOR SERVLET: " + color);
         String cost = request.getParameter("cost");
         String units = request.getParameter("units");
-        
-        VehicleController vehicle= new VehicleController();
-                
-        int idVehicle = vehicle.addVehicle(tradeMark,model,description,color,cost,units);
-        
-        if (idVehicle != 0){
-            request.setAttribute("error", "Se agregó el vehículo exitosamente, el número de referencia es:" + idVehicle);
-            request.getRequestDispatcher("/manager/mgmtProducts/addVehicle.jsp")
+
+        VehicleController vehicle = new VehicleController();
+
+        int idVehicle = vehicle.updateVehicle(tradeMark,model,description,color,cost,units);
+
+        if (idVehicle >= 0) {
+            request.setAttribute("error", "La parte de referencia " + idVehicle + " se ha actualizado correctamente");
+            request.getRequestDispatcher("/manager/mgmtProducts/updateVehicle.jsp")
                     .forward(request, response);
-        }else{
+        } else {
             request.setAttribute("error", "Ocurrió un error, verifique la información");
-            request.getRequestDispatcher("/manager/mgmtProducts/addVehicle.jsp")
+            request.getRequestDispatcher("/manager/mgmtProducts/updateVehicleS.jsp")
                     .forward(request, response);
         }
     }

@@ -30,7 +30,7 @@ public class PartDAO implements DAO<Part>, Serializable {
             em.close();
         }
         return retrievedParts;
-    }
+    }    
 
     @Override
     public Part searchById(Object id) {
@@ -66,6 +66,7 @@ public class PartDAO implements DAO<Part>, Serializable {
 
     @Override
     public boolean update(Object id, Part editedPart) {
+        System.out.println("HOLA ESTOY EN EL DAO, MI ID ES: " + id + ".......");        
         Part tmpPart;
         boolean isSuccessful = true;
         EntityManager em = EntityManagerProvider.createEntityManager();
@@ -73,8 +74,8 @@ public class PartDAO implements DAO<Part>, Serializable {
         try {
             tmpPart = em.merge(this.searchById(id));
             tmpPart.setName(editedPart.getName());
-            tmpPart.setCost(editedPart.getCost());
             tmpPart.setDescription(editedPart.getDescription());
+            tmpPart.setCost(editedPart.getCost());
             tmpPart.setUnits(editedPart.getUnits());
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -89,11 +90,13 @@ public class PartDAO implements DAO<Part>, Serializable {
 
     @Override
     public boolean delete(Object id) {
+        System.out.println("ESTOY EN DELETE DAO PART, ID: " + id);
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
-        Part delPart = this.searchById(id);
+        Part delPart;
         em.getTransaction().begin();
         try {
+            delPart = em.merge(this.searchById(id));
             em.remove(delPart);
             em.getTransaction().commit();
             isSuccessful = true;

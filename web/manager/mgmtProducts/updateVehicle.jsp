@@ -49,7 +49,7 @@
                 </nav>
             </div>
 
-            <div class="row"> <!--Start login form-->>
+            <div class="row"> <!--Start login form-->
                     <div class="row text-center">
                         <h3>Gestionar vehículos</h3>
                         <p>Seleccione el vehículo que desea actualizar</p>

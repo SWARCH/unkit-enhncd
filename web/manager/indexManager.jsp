@@ -42,26 +42,8 @@
                     <div class="thumbnail">
                         <img src="http://placehold.it/262x200" alt="Image">
                         <div class="caption">
-                            <h3>Datos personales</h3>
-                            <p>Aquí, usted puede configurar su perfil.</p>
-                            <p>
-                                <a href="manager/mgmtEmployees/hireEmployee.jsp" class="btn btn-default" role="button">Cambiar contraseña</a>
-                                <a href="manager/mgmtEmployees/fireEmployee.jsp" class="btn btn-default" role="button">Renunciar</a>
-                                <a href="manager/mgmtEmployees/updateEmployee.jsp" class="btn btn-default" role="button">Cambiar nombre</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="http://placehold.it/262x200" alt="Image">
-                        <div class="caption">
-                            <h3>Gestionar empleados</h3>
+                            <h3><a href="<%=request.getContextPath()%>/manager/mgmtEmployees/updateEmployee.jsp">Gestionar empleados</a></h3>
                             <p>Aqui puede usted realizar cambios en la nómina de la fábrica.</p>
-                            <p>
-                                <a href="<%=request.getContextPath()%>/manager/mgmtEmployees/hireEmployee.jsp" class="btn btn-default" role="button">Registrar</a>
-                                <a href="<%=request.getContextPath()%>/manager/mgmtEmployees/fireEmployee.jsp" class="btn btn-default" role="button">Despedir</a>
-                                <a href="<%=request.getContextPath()%>/manager/mgmtEmployees/updateEmployee.jsp" class="btn btn-default" role="button">Actualizar</a>
                             </p>
                         </div>
                     </div>
@@ -85,11 +67,11 @@
                     </div>
                 </div>
             </div> <!-- End navbar -->
-            
+
             <form action="logout" method="POST">
                 <button type="submit" class="btn btn-default">Salir</button>
             </form>
-            
+
         </div>
     </body>
 </html>

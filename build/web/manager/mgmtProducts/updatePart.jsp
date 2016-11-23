@@ -23,7 +23,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <title>Actualizar partes</title>
+        <title>Gestión de partes</title>
     </head>
     <body>
         <div class="container">
@@ -45,45 +45,45 @@
             <div class="masthead">
                 <nav>
                     <ul class="nav nav-justified">
-                        <li class="active"><a href="../indexManager.jsp">Inicio</a></li>
+                        <li class="active"><a href="<%=request.getContextPath()%>/manager/indexManager.jsp">Inicio</a></li>
                         <li><a href="<%=request.getContextPath()%>/manager/mgmtProducts/addPart.jsp">Agregar parte</a></li>
                     </ul>
                 </nav>
             </div>
 
             <div class="row"> <!--Start login form-->
-                <div class="col-md-4 col-md-offset-4">
-                    <div class="row text-center">
-                        <h3>Inventario de partes</h3>
-                        <p>Seleccione la parte que desee actualizar</p>
-                        <table class="table" style="border:1px solid black;">
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Costo</th>
-                                <th>Stock</th>
-                                <th> </th>
-                            </tr>
-                            <%
-                                int j = 0;
-                                for (Part p : allParts) {
-                            %>
-                            <tr>
-                                <td><a href="${pageContext.request.contextPath}/updatePartServlet?idPart=<%=j++%>" ><%=p.getId()%></a></td>
-                                <td><%=p.getName()%></td>
-                                <td><%=p.getDescription()%></td>
-                                <td>$<%=p.getCost()%></td>
-                                <td><%=p.getUnits()%></td>
-                                <td><a href="${pageContext.request.contextPath}/addPartServlet?idPart=<%=p.getId()%>" >Eliminar</a></td>
-                            </tr>
 
-                            <%
-                                }
-                            %>
+                <div class="row text-center">
+                    <h3>Gestionar partes</h3>
+                    <p>Seleccione la parte que desee actualizar</p>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Costo</th>
+                            <th>Stock</th>
+                            <th> </th>
+                        </tr>
+                        <%
+                            int j = 0;
+                            for (Part p : allParts) {
+                        %>
+                        <tr>
+                            <td><a href="${pageContext.request.contextPath}/updatePartServlet?idPart=<%=j++%>" ><%=p.getId()%></a></td>
+                            <td><%=p.getName()%></td>
+                            <td><%=p.getDescription()%></td>
+                            <td>$<%=p.getCost()%></td>
+                            <td><%=p.getUnits()%></td>
+                            <td><a href="${pageContext.request.contextPath}/addPartServlet?idPart=<%=p.getId()%>" >Eliminar</a></td>
+                        </tr>
 
-                        </table>
-                    </div>
+                        <%
+                            }
+                        %>
+
+                    </table>
                 </div>
-                </body>
-                </html>
+            </div>
+    </body>
+</html>

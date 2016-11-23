@@ -23,7 +23,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <title>Actualizar vehículos</title>
+        <title>Gestión de vehículos</title>
     </head>
     <body>
         <div class="container">
@@ -49,17 +49,12 @@
                 </nav>
             </div>
 
-            <div class="row"> <!--Start login form-->
-                <div class="col-md-4 col-md-offset-4">
+            <div class="row"> <!--Start login form-->>
                     <div class="row text-center">
-                        <h3>Actualizar vehículos</h3>
+                        <h3>Gestionar vehículos</h3>
                         <p>Seleccione el vehículo que desea actualizar</p>
-                        <br/>
-                    </div>
-
-
-
-                    <table class="table" style="border:1px solid black;">
+                        
+                    <table class="table table-bordered">
                         <tr>
                             <th>Id</th>
                             <th>Marca</th>

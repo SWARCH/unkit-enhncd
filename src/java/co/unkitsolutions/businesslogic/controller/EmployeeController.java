@@ -9,15 +9,20 @@ import co.unkitsolutions.accessdata.dao.EmployeeDAO;
 import co.unkitsolutions.accessdata.dao.UserDAO;
 import co.unkitsolutions.accessdata.entity.Employee;
 import co.unkitsolutions.accessdata.entity.User;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author lorenags
  */
-public class EmployeeController {
-    
-    public String addEmployee(String userName,String name, String id, String gender,String role,String contracType,String salary,String password, String passwordC){
-        
+public class EmployeeController implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    public static int idUpdateEmployee;
+
+    public String addEmployee(String userName, String name, String id, String gender, String role, String contracType, String salary, String password, String passwordC) {
+
         char gend[] = gender.toCharArray();
         User user = new User();
         Employee employee = new Employee();
@@ -32,7 +37,7 @@ public class EmployeeController {
         employee.setRole(role);
         employee.setContractType(contracType);
         employee.setSalary(Double.parseDouble(salary));
-        employee.setContractStatus("Activo");
+        employee.setContractStatus("active");
 
         UserDAO userDAO = new UserDAO();
 
@@ -49,9 +54,52 @@ public class EmployeeController {
             } else {
                 return "El número de identificación ya está registrado";
             }
-        }else{
+        } else {
             return "El nombre de ususario ya existe";
         }
     }
-    
+
+    public int updateEmployee(String name, String salary) {
+
+        Employee employee = new Employee();
+
+        employee.setName(name);
+        employee.setSalary(Double.parseDouble(salary));
+
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        List<Employee> employees;
+        employees = employeeDAO.searchAll();
+        int idEmployee = employees.get(idUpdateEmployee).getUserId();
+
+        if (employeeDAO.update(idEmployee, employee) == true) {
+            return idEmployee;
+        } else {
+            return 0;
+        }
+    }
+
+    public boolean deleteEmployee(int idEmployee) {
+        System.out.println("DELETE EMPLOYEE");
+        boolean isSuccesfull = false;
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        UserDAO userDAO = new UserDAO();
+
+        if (employeeDAO.delete(idEmployee) == true) {
+            if (userDAO.delete(idEmployee) == true) {
+                isSuccesfull = true;
+                return isSuccesfull;
+            }
+        }
+
+        return isSuccesfull;
+    }
+
+    public void setIdEmployee(int idEmployee) {
+        idUpdateEmployee = idEmployee;
+    }
+
+    public int getIdEmployee() {
+        return idUpdateEmployee;
+    }
+
 }

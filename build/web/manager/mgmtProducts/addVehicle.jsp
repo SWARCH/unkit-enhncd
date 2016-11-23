@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <title>JSP Page</title>
+        <title>Creación de vehículos</title>
     </head>
     <body>
         <div class="container">
@@ -33,7 +33,7 @@
             <div class="masthead">
                 <nav>
                     <ul class="nav nav-justified">
-                        <li class="active"><a href="../indexManager.jsp">Inicio</a></li>
+                        <li class="active"><a href="<%=request.getContextPath()%>/manager/indexManager.jsp">Inicio</a></li>
                         <li><a href="<%=request.getContextPath()%>/manager/mgmtProducts/updateVehicle.jsp">Volver</a></li>
                     </ul>
                 </nav>

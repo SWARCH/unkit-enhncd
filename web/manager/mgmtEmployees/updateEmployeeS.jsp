@@ -1,10 +1,23 @@
 <%-- 
-    Document   : addVehicle
-    Created on : Oct 20, 2016, 9:02:43 AM
-    Author     : mauricio
+    Document   : updateEmployeeS
+    Created on : 22/11/2016, 07:06:23 PM
+    Author     : lorenags
 --%>
 
+<%@page import="co.unkitsolutions.businesslogic.controller.EmployeeController"%>
+<%@page import="co.unkitsolutions.accessdata.dao.EmployeeDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="co.unkitsolutions.accessdata.entity.Employee"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    EmployeeDAO employeeDAO = new EmployeeDAO();
+    List<Employee> employee;
+    employee = employeeDAO.searchAll();
+    EmployeeController uEmployee = new EmployeeController();
+    int idEmployee = (uEmployee.getIdEmployee());
+    System.out.println("PARTE EN JSP: " + employee.get(idEmployee).getName() + "ID: " + employee.get(idEmployee).getUserId());
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,11 +26,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <title>Creación de vehículos</title>
+        <title>Actualización de empleados</title>
     </head>
     <body>
         <div class="container">
-
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
                     <img src="<%=request.getContextPath()%>/images/unkit-logo.jpg">
@@ -34,42 +46,26 @@
                 <nav>
                     <ul class="nav nav-justified">
                         <li class="active"><a href="<%=request.getContextPath()%>/manager/indexManager.jsp">Inicio</a></li>
-                        <li><a href="<%=request.getContextPath()%>/manager/mgmtProducts/updateVehicle.jsp">Volver</a></li>
+                        <li><a href="<%=request.getContextPath()%>/manager/mgmtEmployees/updateEmployee.jsp">Volver</a></li>
                     </ul>
                 </nav>
             </div>
-
+            
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">
                     <div class="row text-center">
-                        <h3>Agregar un vehículo</h3>
+                        <h3>Actualizar los datos de un empleado</h3>
                     </div>
-                    <form action="../../addVehicleServlet" method="post">
+                    <form action="updateEmployee" method="post">
                         <div class="form-group">
-                            <label for="inputTradeMark">Marca</label>
-                            <input class="form-control" type="text" name="tradeMark">
+                            <label for="inputName">Nombres y apellidos</label>
+                            <input class="form-control" type="text" name="name" value=<%=employee.get(idEmployee).getName()%>>
                         </div>
                         <div class="form-group">
-                            <label for="inputModel">Modelo</label>
-                            <input class="form-control" type="text" name="model">
+                            <label for="inputSalary">Salario</label>
+                            <input class="form-control" type="text" name="salary" value=<%=employee.get(idEmployee).getSalary()%>>
                         </div>
-                        <div class="form-group">
-                            <label for="inputDescription">Descripción</label>
-                            <input class="form-control" type="text" name="description">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputColor">Color</label>
-                            <input class="form-control" type="text" name="color">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputCost">Costo</label>
-                            <input class="form-control" type="text" name="cost">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputUnits">Unidades</label>
-                            <input class="form-control" type="text" name="units">
-                        </div>
-                        <button type="submit" class="btn btn-default">Agregar</button>
+                        <button type="submit" class="btn btn-default">Guardar</button>
                         <br><br>
                         <span class="error">${error}</span>
                     </form>
@@ -79,4 +75,3 @@
         </div>
     </body>
 </html>
-

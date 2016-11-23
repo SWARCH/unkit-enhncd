@@ -33,7 +33,7 @@
             <div class="masthead">
                 <nav>
                     <ul class="nav nav-justified">
-                        <li class="active"><a href="../indexManager.jsp">Inicio</a></li>
+                        <li class="active"><a href="<%=request.getContextPath()%>/manager/indexManager.jsp">Inicio</a></li>
                         <li><a href="<%=request.getContextPath()%>/manager/mgmtProducts/updatePart.jsp">Volver</a></li>
                     </ul>
                 </nav>

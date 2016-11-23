@@ -9,6 +9,7 @@ import co.unkitsolutions.accessdata.dao.EmployeeDAO;
 import co.unkitsolutions.accessdata.dao.UserDAO;
 import co.unkitsolutions.accessdata.entity.Employee;
 import co.unkitsolutions.accessdata.entity.User;
+import com.novell.ldap.LDAPEntry;
 import java.io.Serializable;
 import java.util.List;
 
@@ -45,9 +46,17 @@ public class EmployeeController implements Serializable {
             if (userDAO.searchById(id) == null) {
                 if (password.equals(passwordC) == true) {
                     EmployeeDAO employeeDAO = new EmployeeDAO();
+                    
+                    //user creation for ldap register
                     userDAO.create(user);
                     employeeDAO.create(employee);
-                    return "La cuenta del empleado se creó exitosamente";
+                    LoginLdapController ldapController = new LoginLdapController();
+                   //LDAPEntry userName = new LDAPEntry(userName);
+                    if (ldapController.createEmployeeLDAP(userName, password)== true) {
+                        return "La cuenta del empleado se creó exitosamente";
+                    } else {
+                        return "No se pudo crear la cuenta";
+                    }
                 } else {
                     return "Las contraseñas no coinciden";
                 }

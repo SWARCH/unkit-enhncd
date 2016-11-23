@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author lorenags
  */
-public class AddEmployeeServlet extends HttpServlet {
+public class UpdateEmployee extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +36,10 @@ public class AddEmployeeServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddEmployeeServlet</title>");            
+            out.println("<title>Servlet UpdateEmployee</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddEmployeeServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateEmployee at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,22 +57,16 @@ public class AddEmployeeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("ESTOY EN DOGET________________________ADD PART SERVLET");
+        System.out.println("ESTOY EN DOGET EMPLOYEE--------------");
 
         int idEmployee = Integer.parseInt(request.getParameter("idEmployee"));
         System.out.println("idEmployee = " + idEmployee);
 
         EmployeeController employeeController = new EmployeeController();
+        employeeController.setIdEmployee(idEmployee);
 
-        if (employeeController.deleteEmployee(idEmployee) == true) {
-            request.setAttribute("error", "El empleado " + idEmployee + " se ha eliminado correctamente");
-            request.getRequestDispatcher("/manager/mgmtEmployees/updateEmployee.jsp")
-                    .forward(request, response);
-        } else {
-            request.setAttribute("error", "Ocurrió un error, verifique la información");
-            request.getRequestDispatcher("/manager/mgmtEmployees/updateEmployee.jsp")
-                    .forward(request, response);
-        }
+        request.getRequestDispatcher("/manager/mgmtEmployees/updateEmployeeS.jsp")
+                .forward(request, response);
     }
 
     /**
@@ -86,25 +80,21 @@ public class AddEmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usr = request.getParameter("user");
+        System.out.println("ENTRE A DOPOST -------------------UPDATE---------------------");
         String name = request.getParameter("name");
-        String id = request.getParameter("id");
-        String gender = request.getParameter("gender");
-        String role = request.getParameter("role");
-        String contractType = request.getParameter("contractType");
         String salary = request.getParameter("salary");
-        String password = request.getParameter("password");
-        String passwordC = request.getParameter("passwordC");
 
         EmployeeController employee = new EmployeeController();
-        String message = employee.addEmployee(usr,name,id,gender,role,contractType,salary,password,passwordC);
 
-        if (message.equals("La cuenta del empleado se creó exitosamente")) {
+        int idEmployee = employee.updateEmployee(name,salary);
+
+        if (idEmployee >= 0) {
+            request.setAttribute("error", "El empleado " + name + " se ha actualizado correctamente");
             request.getRequestDispatcher("/manager/mgmtEmployees/updateEmployee.jsp")
                     .forward(request, response);
         } else {
-            request.setAttribute("error", message);
-            request.getRequestDispatcher("/manager/mgmtEmployees/hireEmployee.jsp")
+            request.setAttribute("error", "Ocurrió un error, verifique la información");
+            request.getRequestDispatcher("/manager/mgmtEmployees/updateEmployeeS.jsp")
                     .forward(request, response);
         }
     }

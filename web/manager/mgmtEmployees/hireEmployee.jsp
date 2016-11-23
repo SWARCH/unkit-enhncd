@@ -12,14 +12,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <title>Contratación de empleados</title>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <title>Registro de empleados</title>
     </head>
     <body>
         <div class="container">
 
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
-                    <img src="../../images/unkit-logo.jpg">
+                    <img src="<%=request.getContextPath()%>/images/unkit-logo.jpg">
                 </div>
                 <div class="col-md-6 text-right text-uppercase">
                     <h1>UN KIT Solutions Ltda.</h1>
@@ -29,10 +30,19 @@
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
 
+            <div class="masthead">
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li class="active"><a href="<%=request.getContextPath()%>/manager/indexManager.jsp">Inicio</a></li>
+                        <li><a href="<%=request.getContextPath()%>/manager/mgmtEmployees/updateEmployee.jsp">Volver</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">
                     <div class="row text-center">
-                        <h3>Contratar un empleado</h3>
+                        <h3>Registrar un empleado</h3>
                     </div>
                     <form action="../../addEmployeeServlet" method="post">
                         <div class="form-group">
@@ -65,7 +75,7 @@
                         <div class="form-group">
                             <label for="inputContractType">Tipo de contrato</label>
                             <select name="contractType">
-                                <option value="indefined">Indefinido</option>
+                                <option value="undefined">Indefinido</option>
                                 <option value="fixedTerm">Termino fijo</option>
                                 <option value="services">Prestación de servicios</option>
                             </select>
@@ -82,7 +92,7 @@
                             <label for="inputPasswordC">Confirme su contraseña</label>
                             <input class="form-control" type="password" name="passwordC">
                         </div>
-                        <button type="submit" class="btn btn-default">Registrarse</button>
+                        <button type="submit" class="btn btn-default">Registrar</button>
                         <br><br>
                         <span class="error">${error}</span>
                     </form>

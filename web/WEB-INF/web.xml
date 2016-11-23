@@ -33,6 +33,10 @@
         <servlet-name>AddEmployeeServlet</servlet-name>
         <servlet-class>co.unkitsolutions.servlets.AddEmployeeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateEmployee</servlet-name>
+        <servlet-class>co.unkitsolutions.servlets.UpdateEmployee</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>AddEmployeeServlet</servlet-name>
         <url-pattern>/addEmployeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateEmployee</servlet-name>
+        <url-pattern>/updateEmployee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

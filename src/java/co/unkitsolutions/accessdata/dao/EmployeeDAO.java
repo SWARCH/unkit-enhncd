@@ -19,11 +19,14 @@ public class EmployeeDAO implements DAO<Employee>, Serializable {
 
     @Override
     public List<Employee> searchAll() {
+        System.out.println("HOLA EMPLOYEE DAO SEARCH ALL----------- :D");
         EntityManager em = EntityManagerProvider.createEntityManager();
         List<Employee> retrievedEmployees = null;
         try {
+            System.out.println("HOLA EMPLOYEE DAO SEARCH ALL----------- 1");
             retrievedEmployees = em.createNamedQuery("Employee.findAll")
                 .getResultList();
+            System.out.println("HOLA EMPLOYEE DAO SEARCH ALL----------- 2");
         } catch(Exception e) {
             System.err.println("Problems in EmployeeDAO.searchAll(): " + e);
         } finally {
@@ -72,14 +75,8 @@ public class EmployeeDAO implements DAO<Employee>, Serializable {
         em.getTransaction().begin();
         try {
             tmpEmployee = em.merge(this.searchById(id));
-            
             tmpEmployee.setName(editedEmployee.getName());
-            tmpEmployee.setGender(editedEmployee.getGender());
-            tmpEmployee.setRole(editedEmployee.getRole());
             tmpEmployee.setSalary(editedEmployee.getSalary());
-            tmpEmployee.setContractStatus(editedEmployee.getContractStatus());
-            tmpEmployee.setContractType(editedEmployee.getContractType());
-            
             em.getTransaction().commit();
         } catch (Exception e) {
             System.err.println("Problems in EmployeeDAO.update(): " + e);
@@ -95,10 +92,11 @@ public class EmployeeDAO implements DAO<Employee>, Serializable {
     public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
-        Employee delEmployee = this.searchById(id);
+        Employee delEmployee;
         UserDAO userDAO = new UserDAO();
         em.getTransaction().begin();
         try {
+            delEmployee = em.merge(this.searchById(id));
             em.remove(delEmployee);
             userDAO.delete(id);
             em.getTransaction().commit();

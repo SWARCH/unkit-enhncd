@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%System.out.println("-------------------HOLA MANAGER-------------");%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,9 +59,9 @@
                             <h3>Gestionar empleados</h3>
                             <p>Aqui puede usted realizar cambios en la nómina de la fábrica.</p>
                             <p>
-                                <a href="manager/mgmtEmployees/hireEmployee.jsp" class="btn btn-default" role="button">Contratar</a>
-                                <a href="manager/mgmtEmployees/fireEmployee.jsp" class="btn btn-default" role="button">Despedir</a>
-                                <a href="manager/mgmtEmployees/updateEmployee.jsp" class="btn btn-default" role="button">Actualizar</a>
+                                <a href="<%=request.getContextPath()%>/manager/mgmtEmployees/hireEmployee.jsp" class="btn btn-default" role="button">Registrar</a>
+                                <a href="<%=request.getContextPath()%>/manager/mgmtEmployees/fireEmployee.jsp" class="btn btn-default" role="button">Despedir</a>
+                                <a href="<%=request.getContextPath()%>/manager/mgmtEmployees/updateEmployee.jsp" class="btn btn-default" role="button">Actualizar</a>
                             </p>
                         </div>
                     </div>

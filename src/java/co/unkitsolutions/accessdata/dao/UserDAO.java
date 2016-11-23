@@ -136,9 +136,10 @@ public class UserDAO implements DAO<User>, Serializable {
     public boolean delete(Object id) {
         boolean isSuccessful = false;
         EntityManager em = EntityManagerProvider.createEntityManager();
-        User delUser = this.searchById(id);
+        User delUser;
         em.getTransaction().begin();
         try {
+            delUser = em.merge(this.searchById(id));
             em.remove(delUser);
             em.getTransaction().commit();
             isSuccessful = true;

@@ -12,13 +12,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <title>Manager Home</title>
     </head>
     <body>
         <div class="container">
             <div class="row"> <!--Start header-->
                 <div class="col-md-6">
-                    <img src="http://placehold.it/100x100">
+                    <img src="<%=request.getContextPath()%>/images/unkit-logo.jpg">
                 </div>
                 <div class="col-md-6 text-right text-uppercase">
                     <h1>UN KIT Solutions Ltda.</h1>
@@ -70,12 +71,8 @@
                     <div class="thumbnail">
                         <img src="http://placehold.it/262x200" alt="Image">
                         <div class="caption">
-                            <h3>Gestionar partes</h3>
+                            <h3><a href="<%=request.getContextPath()%>/manager/mgmtProducts/updatePart.jsp">Gestionar partes</a></h3>
                             <p>Aqui puede usted realizar la gestión de las partes.</p>
-                            <p><!--a href="#" class="btn btn-primary" role="button">Button</a> -->
-                                <a href="manager/mgmtProducts/addPart.jsp" class="btn btn-default" role="button">Adicionar</a>
-                                <a href="manager/mgmtProducts/updatePart.jsp" class="btn btn-default" role="button">Actualizar</a>
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -83,12 +80,8 @@
                     <div class="thumbnail">
                         <img src="http://placehold.it/262x200" alt="Image">
                         <div class="caption">
-                            <h3>Gestionar vehículos</h3>
-                            <p>Texto</p>
-                            <p><!--a href="#" class="btn btn-primary" role="button">Button</a> -->
-                                <a href="manager/mgmtProducts/addVehicle.jsp" class="btn btn-default" role="button">Adicionar</a>
-                                <a href="manager/mgmtProducts/updateVehicle.jsp" class="btn btn-default" role="button">Actualizar</a>
-                            </p>
+                            <h3><a href="<%=request.getContextPath()%>/manager/mgmtProducts/updateVehicle.jsp">Gestionar vehículos</a></h3>
+                            <p>Aqui puede usted realizar la gestión de las partes.</p>
                         </div>
                     </div>
                 </div>

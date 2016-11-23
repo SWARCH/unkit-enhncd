@@ -5,23 +5,20 @@
  */
 package co.unkitsolutions.servlets;
 
-import co.unkitsolutions.businesslogic.controller.CustomerController;
+import co.unkitsolutions.accessdata.entity.Customer;
+import co.unkitsolutions.businesslogic.controller.Shop;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author lorenags
+ * @author mauricio
  */
-@WebServlet(name = "RegisterCustomer", urlPatterns = {"/RegisterCustomer"})
-public class RegisterCustomer extends HttpServlet implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class BuyVehicleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,19 +34,19 @@ public class RegisterCustomer extends HttpServlet implements Serializable {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            /* out.println("<!DOCTYPE html>");
-             out.println("<html>");
-             out.println("<head>");
-             out.println("<title>Servlet RegisterCustomer</title>");            
-             out.println("</head>");
-             out.println("<body>");
-             out.println("<h1>Servlet RegisterCustomer at " + request.getContextPath() + "</h1>");
-             out.println("</body>");
-             out.println("</html>");*/
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet BuyVehicleServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet BuyVehicleServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
-     /**
+    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -74,24 +71,22 @@ public class RegisterCustomer extends HttpServlet implements Serializable {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usr = request.getParameter("user");
-        String tradeName = request.getParameter("tradeName");
-        String id = request.getParameter("id");
-        String type = request.getParameter("type");
-        String password = request.getParameter("password");
-        String passwordC = request.getParameter("passwordC");
-
-        CustomerController customer = new CustomerController();
-        String message = customer.registerCustomer(usr, tradeName, Integer.parseInt(id), type, password, passwordC);
-
-        if (message.equals("Su cuenta se creó exitosamente")) {
-            request.getRequestDispatcher("/login.jsp")
+        String vehicleId = request.getParameter("vehicleId");
+        String vehicleQuant = request.getParameter("vehicleQuant");
+        
+        
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        Shop shop = new Shop();
+        
+        System.out.println("vehicleId =" + vehicleId);
+        System.out.println("vehicleQant =" + vehicleQuant);
+        System.out.println("custId =" + customer.getUserId());
+        
+        
+        shop.buyVehicle(customer.getUserId(), Integer.parseInt(vehicleId), Integer.parseInt(vehicleQuant));
+        
+        request.getRequestDispatcher("/customer/wholesaler/buyVehicle.jsp")
                     .forward(request, response);
-        } else {
-            request.setAttribute("error", message);
-            request.getRequestDispatcher("/registerCustomer.jsp")
-                    .forward(request, response);
-        }
     }
 
     /**

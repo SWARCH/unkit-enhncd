@@ -40,7 +40,7 @@
                             <input class="form-control" type="text" name="usr">
                         </div>
                         <div class="form-group">
-                            <label for="inputUsername">Contraseña</label>
+                            <label for="inputUPassword">Contraseña</label>
                             <input class="form-control" type="password" name="pwd">
                         </div>
                         <button type="submit" class="btn btn-default">Ingresar</button>

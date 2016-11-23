@@ -29,6 +29,18 @@
         <servlet-name>UpdatePartServlet</servlet-name>
         <servlet-class>co.unkitsolutions.servlets.UpdatePartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddEmployeeServlet</servlet-name>
+        <servlet-class>co.unkitsolutions.servlets.AddEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuyPartServlet</servlet-name>
+        <servlet-class>co.unkitsolutions.servlets.BuyPartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuyVehicleServlet</servlet-name>
+        <servlet-class>co.unkitsolutions.servlets.BuyVehicleServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -52,6 +64,18 @@
     <servlet-mapping>
         <servlet-name>UpdatePartServlet</servlet-name>
         <url-pattern>/updatePartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddEmployeeServlet</servlet-name>
+        <url-pattern>/addEmployeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyPartServlet</servlet-name>
+        <url-pattern>/buyPartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyVehicleServlet</servlet-name>
+        <url-pattern>/buyVehicleServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

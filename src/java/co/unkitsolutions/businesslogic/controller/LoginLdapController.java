@@ -6,6 +6,7 @@
 package co.unkitsolutions.businesslogic.controller;
 
 import com.novell.ldap.LDAPConnection;
+import com.novell.ldap.LDAPEntry;
 import com.novell.ldap.LDAPException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -15,12 +16,13 @@ import java.io.UnsupportedEncodingException;
  * @author lorenags
  */
 public class LoginLdapController implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private LDAPConnection lc = new LDAPConnection();
 
-    public String login(String user, String password){
+    public String login(String user, String password) {
 
-        System.out.println("ESTOY EN LOGIN LDAP CONTROLLER :D, user: " + user + ", password" + password );
+        System.out.println("ESTOY EN LOGIN LDAP CONTROLLER :D, user: " + user + ", password" + password);
         if (connect()) {
             if (validatePassword(user, password)) {
                 return "Inicio de sesión satisfactorio.";
@@ -32,13 +34,13 @@ public class LoginLdapController implements Serializable {
         }
     }
 
-    public Boolean connect(){
+    public Boolean connect() {
 
         String ldapHost = "127.0.0.1";
         String dn = "cn=admin,dc=arqsoft,dc=unal,dc=edu,dc=co";
         String password = "Dulcinea985";
 
-        int ldapPort =  LDAPConnection.DEFAULT_PORT;
+        int ldapPort = LDAPConnection.DEFAULT_PORT;
         int ldapVersion = LDAPConnection.LDAP_V3;
 
         try {
@@ -54,17 +56,19 @@ public class LoginLdapController implements Serializable {
 
     }
 
-    public Boolean validatePassword(String user, String password){
+    public Boolean validatePassword(String user, String password) {
 
         String dn = "cn=" + user + ",ou=Unkit,dc=arqsoft,dc=unal,dc=edu,dc=co";
 
         try {
             lc.bind(dn, password);
+
             System.out.println("==== Contraseña validada ====");
             return true;
         } catch (LDAPException ex) {
             System.out.println("==== ERROR al validar la contraseña ====");
             return false;
         }
-    }    
+    }
+
 }

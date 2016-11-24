@@ -78,7 +78,7 @@ public class BuyPartServlet extends HttpServlet {
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Shop shop = new Shop();
         
-        ResponseMessage responseMessage = shop.buyPart_(customer.getUserId(), Integer.parseInt(partId), Integer.parseInt(partQuant));
+        ResponseMessage responseMessage = shop.buyPart(customer.getUserId(), Integer.parseInt(partId), Integer.parseInt(partQuant));
         request.setAttribute("message", responseMessage.getErrorMessage());
         request.getRequestDispatcher("/customer/assembler/buyPart.jsp")
                     .forward(request, response);

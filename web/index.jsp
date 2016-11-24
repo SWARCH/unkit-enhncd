@@ -44,8 +44,7 @@
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
 
-            <!-- The justified navigation menu is meant for single line per list item.
-           Multiple lines will require custom code not provided by Bootstrap. -->
+            <!-- Navigation menu -->
             <div class="masthead">
                 <nav>
                     <ul class="nav nav-justified">

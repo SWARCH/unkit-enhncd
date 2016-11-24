@@ -35,51 +35,20 @@ import java.util.Locale;
 public class Shop implements Serializable {
     public final String SUCCESS_MESSAGE = "Compra realizada con éxito";
     public final String BAD_QUANTITY_MESSAGE = "La cantidad ingresada es erronea";
-    public final String BAD_CUSTOMER_MESSAGE = "";
+    public final String BAD_CUSTOMER_MESSAGE = "Usuario invalido";
 
     private static final long serialVersionUID = 1L;
-    private UserDAO userDAO = new UserDAO();
-    private EmployeeDAO employeeDAO = new EmployeeDAO();
     private CustomerDAO customerDAO = new CustomerDAO();
     private VehicleDAO vehicleDAO = new VehicleDAO();
     private PartDAO partDAO = new PartDAO();
     private OrderPartDAO orderPartDAO = new OrderPartDAO();
     private OrderVehicleDAO orderVehicleDAO = new OrderVehicleDAO();
-    private ProductOrderDAO productOrderDAO = new ProductOrderDAO();
+    
+    public Shop() {
+        
+    }
 
     public ResponseMessage buyPart(Integer custId, Integer partId, Integer quantity) {
-        ResponseMessage responseMessage = new ResponseMessage();
-
-        Part part = new Part();
-        PartDAO partDAO = new PartDAO();
-        part = partDAO.searchById(partId);
-
-        if (part.getUnits() - quantity >= 0) {
-            part.setUnits(part.getUnits() - quantity);
-            partDAO.update(partId, part);
-            responseMessage.setSuccess(true);
-        }
-        responseMessage.setData(part.getCost() * quantity);
-        return responseMessage;
-    }
-
-    public ResponseMessage buyVehicle(Integer custId, Integer vehicleId, Integer quantity) {
-        ResponseMessage responseMessage = new ResponseMessage();
-
-        Vehicle vehicle = new Vehicle();
-        VehicleDAO vehicleDAO = new VehicleDAO();
-        vehicle = vehicleDAO.searchById(vehicleId);
-
-        if (vehicle.getUnits() - quantity >= 0) {
-            vehicle.setUnits(vehicle.getUnits() - quantity);
-            vehicleDAO.update(vehicleId, vehicle);
-            responseMessage.setSuccess(true);
-        }
-        responseMessage.setData(vehicle.getCost() * quantity);
-        return responseMessage;
-    }
-
-    public ResponseMessage buyPart_(Integer custId, Integer partId, Integer quantity) {
         ResponseMessage responseMessage = new ResponseMessage();
         if (isValidCustomer(custId)) {
             if (isPartAvailable(partId, quantity)) {
@@ -97,7 +66,7 @@ public class Shop implements Serializable {
         return responseMessage;
     }
     
-    public ResponseMessage buyVehicle_(Integer custId, Integer vehicleId, Integer quantity) {
+    public ResponseMessage buyVehicle(Integer custId, Integer vehicleId, Integer quantity) {
         ResponseMessage responseMessage = new ResponseMessage();
         if (isValidCustomer(custId)) {
             if (isVehicleAvailable(vehicleId, quantity)) {
@@ -125,9 +94,7 @@ public class Shop implements Serializable {
 
     public boolean isValidCustomer(Integer custId) {
         Customer retrievedCustomer = customerDAO.searchById(custId);
-        // TODO: validate customer id
-        //return retrievedCustomer == null;
-        return true;
+        return retrievedCustomer != null;
     }
 
     public boolean isPartAvailable(Integer partId, Integer quantity) {
@@ -176,7 +143,5 @@ public class Shop implements Serializable {
         OrderVehicle orderVehicle = new OrderVehicle(orderVehiclePK, quantity);
         orderVehicleDAO.create(orderVehicle);
     }
-
-    
 
 }

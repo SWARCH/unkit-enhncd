@@ -28,6 +28,18 @@
             </div>
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
+            
+            <!-- Navigation menu -->
+            <div class="masthead">
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath}/index.jsp">Retroceder</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <br>
 
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">
@@ -52,7 +64,7 @@
 
             <!-- FOOTER -->
             <footer>
-                <p class="pull-right"><a href="./index.jsp">Back to top</a></p>
+                <p class="pull-right"><a href="./login.jsp">Back to top</a></p>
                 <p>&copy; 2016 Unkit Solutions Ltda.  &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
             </footer>
 

@@ -29,6 +29,18 @@
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
             
+            <!-- Navigation menu -->
+            <div class="masthead">
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li class="active"><a href="/index.jsp">Home</a></li>
+                        <li><a href="#">Aprenda más</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <br>
+            
             <div class="row"> <!--Start login form-->
                 <div class="col-md-4 col-md-offset-4">
                     <div class="row text-center">

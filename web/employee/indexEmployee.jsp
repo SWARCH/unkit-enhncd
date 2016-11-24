@@ -58,16 +58,24 @@
                     </div>
                     <form action="loginServlet" method="post">
                         <div class="form-group">
-                            <label for="ce_username">Nombre de usuario: </label>
+                            <label for="ce_username">ID: </label>
+                            <%= currentEmployee.getUser().getId()%>
+                        </div>
+                        <div class="form-group">
+                            <label for="ce_username">Nombre de acceso: </label>
+                            <%= currentEmployee.getUser().getUsername()%>
+                        </div>
+                        <div class="form-group">
+                            <label for="ce_username">Nombre completo: </label>
                             <%= currentEmployee.getName()%>
                         </div>
                         <div class="form-group">
-                            <label for="ce_">Salario: </label>
+                            <label for="ce_salary">Salario: </label>
                             $<%= currentEmployee.getSalary()%>
                         </div>
                         <div class="form-group">
                             <label for="ce_">Estado del contrato: </label>
-                            <%= currentEmployee.getContractStatus()%>
+                            <%= currentEmployee.getContractStatus().equals("active")? "Activo" : "Otro" %>
                         </div>
                         <a href="#" class="btn btn-default">Cambiar contraseña</a>
                         <a href="${pageContext.request.contextPath}/quitJobServlet?quit=true">Renunciar</a>

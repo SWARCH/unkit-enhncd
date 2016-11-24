@@ -82,7 +82,7 @@ public class BuyVehicleServlet extends HttpServlet {
         System.out.println("vehicleQant =" + vehicleQuant);
         System.out.println("custId =" + customer.getUserId());
         
-        shop.buyVehicle_(customer.getUserId(), Integer.parseInt(vehicleId), Integer.parseInt(vehicleQuant));
+        shop.buyVehicle(customer.getUserId(), Integer.parseInt(vehicleId), Integer.parseInt(vehicleQuant));
         
         request.getRequestDispatcher("/customer/wholesaler/buyVehicle.jsp")
                     .forward(request, response);

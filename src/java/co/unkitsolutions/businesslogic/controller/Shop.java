@@ -33,6 +33,9 @@ import java.util.Locale;
  * @author mauricio
  */
 public class Shop implements Serializable {
+    public final String SUCCESS_MESSAGE = "Compra realizada con éxito";
+    public final String BAD_QUANTITY_MESSAGE = "La cantidad ingresada es erronea";
+    public final String BAD_CUSTOMER_MESSAGE = "";
 
     private static final long serialVersionUID = 1L;
     private UserDAO userDAO = new UserDAO();
@@ -82,13 +85,14 @@ public class Shop implements Serializable {
             if (isPartAvailable(partId, quantity)) {
                 responseMessage.setData(makePartPurchase(custId, partId, quantity));
                 responseMessage.setSuccess(true);
+                responseMessage.setErrorMessage(SUCCESS_MESSAGE);
             } else {
                 responseMessage.setSuccess(false);
-                responseMessage.setErrorMessage("Invalid quantity");
+                responseMessage.setErrorMessage(BAD_QUANTITY_MESSAGE);
             }
         } else {
             responseMessage.setSuccess(false);
-            responseMessage.setErrorMessage("Invalid customer");
+            responseMessage.setErrorMessage(BAD_CUSTOMER_MESSAGE);
         }
         return responseMessage;
     }
@@ -99,13 +103,14 @@ public class Shop implements Serializable {
             if (isVehicleAvailable(vehicleId, quantity)) {
                 responseMessage.setData(makeVehiclePurchase(custId, vehicleId, quantity));
                 responseMessage.setSuccess(true);
+                responseMessage.setErrorMessage(SUCCESS_MESSAGE);
             } else {
                 responseMessage.setSuccess(false);
-                responseMessage.setErrorMessage("Invalid quantity");
+                responseMessage.setErrorMessage(BAD_QUANTITY_MESSAGE);
             }
         } else {
             responseMessage.setSuccess(false);
-            responseMessage.setErrorMessage("Invalid customer");
+            responseMessage.setErrorMessage(BAD_CUSTOMER_MESSAGE);
         }
         return responseMessage;
     }
@@ -120,6 +125,7 @@ public class Shop implements Serializable {
 
     public boolean isValidCustomer(Integer custId) {
         Customer retrievedCustomer = customerDAO.searchById(custId);
+        // TODO: validate customer id
         //return retrievedCustomer == null;
         return true;
     }
@@ -137,49 +143,36 @@ public class Shop implements Serializable {
     }
 
     public Double makePartPurchase(Integer custId, Integer partId, Integer quantity) {
+        //ProductOrderPK productOrderPK = new ProductOrderPK(partId.hashCode(), custId);
+        //ProductOrder productOrder = new ProductOrder(productOrderPK, new Date());
+        //productOrderDAO.create(productOrder);
+        
         Part retrievedPart = partDAO.searchById(partId);
-        Double orderCost = retrievedPart.getCost() * quantity;
         retrievedPart.setUnits(retrievedPart.getUnits() - quantity);
         partDAO.update(custId, retrievedPart);
-        makePartOrder(custId, partId, quantity);
-        return orderCost;
+        //makePartOrder(custId, partId, quantity);
+        return retrievedPart.getCost() * quantity;
     }
     
     public void makePartOrder(Integer custId, Integer partId, Integer quantity) {
-        Date today;
-        String result;
-        SimpleDateFormat formatter;
-        
-        formatter = new SimpleDateFormat("ddMMyy", Locale.US);
-        today = new Date();
-        String s = formatter.format(today) + custId + partId;
-        System.err.println("orderId " + s);
-        Integer orderId = Integer.parseInt(s);
-        OrderPartPK orderPartPK = new OrderPartPK(orderId, custId, partId);
+        OrderPartPK orderPartPK = new OrderPartPK(partId.hashCode(), custId, partId);
         OrderPart orderPart = new OrderPart(orderPartPK, quantity);
         orderPartDAO.create(orderPart);
     }
     
     public Double makeVehiclePurchase(Integer custId, Integer vehicleId, Integer quantity) {
+        //ProductOrderPK productOrderPK = new ProductOrderPK(vehicleId.hashCode(), custId);
+        //ProductOrder productOrder = new ProductOrder(productOrderPK, new Date());
+        //productOrderDAO.create(productOrder);
         Vehicle retrievedVehicle = vehicleDAO.searchById(vehicleId);
-        Double orderCost = retrievedVehicle.getCost() * quantity;
         retrievedVehicle.setUnits(retrievedVehicle.getUnits() - quantity);
         vehicleDAO.update(custId, retrievedVehicle);
-        makeVehicleOrder(custId, vehicleId, quantity);
-        return orderCost;
+        //makeVehicleOrder(custId, vehicleId, quantity);
+        return retrievedVehicle.getCost() * quantity;
     }
     
     public void makeVehicleOrder(Integer custId, Integer vehicleId, Integer quantity) {
-        Date today;
-        String result;
-        SimpleDateFormat formatter;
-        
-        formatter = new SimpleDateFormat("ddMMyy", Locale.US);
-        today = new Date();
-        String s = formatter.format(today) + custId + vehicleId;
-        System.err.println("vehicleId " + s);
-        Integer orderId = Integer.parseInt(s);
-        OrderVehiclePK orderVehiclePK = new OrderVehiclePK(orderId, custId, vehicleId);
+        OrderVehiclePK orderVehiclePK = new OrderVehiclePK(vehicleId.hashCode(), custId, vehicleId);
         OrderVehicle orderVehicle = new OrderVehicle(orderVehiclePK, quantity);
         orderVehicleDAO.create(orderVehicle);
     }

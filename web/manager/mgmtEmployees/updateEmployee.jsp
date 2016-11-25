@@ -56,7 +56,7 @@
             <div class="row"> <!--Start login form-->
 
                 <div class="row text-center">
-                    <h3>Gestionar partes</h3>
+                    <h3>Gestionar de empleados</h3>
                     <p>Seleccione la parte que desee actualizar</p>
                     <table class="table table-bordered">
                         <tr>

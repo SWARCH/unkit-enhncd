@@ -51,8 +51,7 @@ public class EmployeeController implements Serializable {
                     userDAO.create(user);
                     employeeDAO.create(employee);
                     LoginLdapController ldapController = new LoginLdapController();
-                   //LDAPEntry userName = new LDAPEntry(userName);
-                    if (ldapController.createEmployeeLDAP(userName, password)== true) {
+                    if (ldapController.createEmployeeLDAP(userName, password)) {
                         return "La cuenta del empleado se creó exitosamente";
                     } else {
                         return "No se pudo crear la cuenta";

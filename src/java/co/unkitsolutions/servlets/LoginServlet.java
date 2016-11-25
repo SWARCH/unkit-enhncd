@@ -80,6 +80,13 @@ public class LoginServlet extends HttpServlet implements Serializable {
             throws ServletException, IOException {
         String usr = request.getParameter("usr");
         String pwd = request.getParameter("pwd");
+        
+        LoginLdapController loginLdap = new LoginLdapController();
+        //String mess = loginLdap.login(usr,pwd);
+        String mess = "Inicio de sesión satisfactorio.";
+                
+        if (mess.equals("Inicio de sesión satisfactorio.") ){
+        
         UserDAO userDAO = new UserDAO();
         User user = userDAO.searchValidUser(usr, pwd);
         System.out.println("!!!!!!!!!!!!!!!!!!User:" + user);
@@ -134,7 +141,12 @@ public class LoginServlet extends HttpServlet implements Serializable {
                     .forward(request, response);
             //request.getRequestDispatcher("/error.jsp")
             //        .forward(request, response);
+        }}else{
+            request.setAttribute("error", mess);
+            request.getRequestDispatcher("/login.jsp")
+                    .forward(request, response);
         }
+        
     }
 
     /**

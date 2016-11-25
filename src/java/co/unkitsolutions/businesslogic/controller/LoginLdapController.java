@@ -5,6 +5,8 @@
  */
 package co.unkitsolutions.businesslogic.controller;
 
+import com.novell.ldap.LDAPAttribute;
+import com.novell.ldap.LDAPAttributeSet;
 import com.novell.ldap.LDAPConnection;
 import com.novell.ldap.LDAPEntry;
 import com.novell.ldap.LDAPException;
@@ -36,9 +38,13 @@ public class LoginLdapController implements Serializable {
 
     public Boolean connect() {
 
-        String ldapHost = "127.0.0.1";
+        /*String ldapHost = "127.0.0.1";
         String dn = "cn=admin,dc=arqsoft,dc=unal,dc=edu,dc=co";
-        String password = "Dulcinea985";
+        String password = "Dulcinea985";*/
+        
+        String ldapHost = "192.168.2.10";
+        String dn = "cn=admin,dc=arqsoft,dc=unal,dc=edu,dc=co";
+        String password = "arqsoft20162";
 
         int ldapPort = LDAPConnection.DEFAULT_PORT;
         int ldapVersion = LDAPConnection.LDAP_V3;
@@ -71,4 +77,55 @@ public class LoginLdapController implements Serializable {
         }
     }
 
+    public boolean createEmployeeLDAP(String userName, String password) {
+        boolean isSuccesfull = false;
+
+        LDAPConnection lc = new LDAPConnection();
+
+        LDAPAttribute attribute = null;
+
+        LDAPAttributeSet attributeSet = new LDAPAttributeSet();
+
+        attributeSet.add(new LDAPAttribute("objectclass", new String("inetOrgPerson")));
+
+        attributeSet.add(new LDAPAttribute("cn", new String[]{userName}));
+
+        attributeSet.add(new LDAPAttribute("givenname", userName));
+
+        attributeSet.add(new LDAPAttribute("sn", userName));
+
+        attributeSet.add(new LDAPAttribute("userpassword", password));
+
+        String dn = "cn=" + userName + ",ou=Unkit,dc=arqsoft,dc=unal,dc=edu,dc=co";
+
+        LDAPEntry newEntry = new LDAPEntry(dn, attributeSet);
+
+        try {
+
+            String ldapHost = "192.168.2.10";
+            String loginDN = "cn=admin,dc=arqsoft,dc=unal,dc=edu,dc=co";
+            String passwordL = "arqsoft20162";
+
+            int ldapPort = LDAPConnection.DEFAULT_PORT;
+            int ldapVersion = LDAPConnection.LDAP_V3;
+
+            lc.connect(ldapHost, ldapPort);
+
+            lc.bind(ldapVersion, loginDN, passwordL);
+            lc.add(newEntry);
+
+            System.out.println("\nAdded object: " + dn + " successfully.");
+
+            // disconnect with the server
+            lc.disconnect();
+            isSuccesfull = true;
+
+        } catch (LDAPException e) {
+
+            System.out.println("Error:  " + e.toString());
+            isSuccesfull = false;
+        }
+
+        return isSuccesfull;
+    }
 }

@@ -41,11 +41,11 @@
                 <% }%>
                 <nav>
                     <ul class="nav nav-justified">
-                        <li class="active"><a href="index.jsp">Home</a></li>
-                        <li><a href="#">Manual del empleado</a></li>
-                        <li><a href="#">Manual técnico</a></li>
-                        <li><a href="#">Terminos de uso</a></li>
-                        <li><a href="#">Contacta a tu patrón</a></li>
+                        <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath}/employee/changePassword.jsp">Cambiar contraseña</a></li>
+                        <li><a href="quitJobServlet">Renunciar</a></li>
+                        <li><a href="${pageContext.request.contextPath}/assembler/indexAssembler.jsp">Retroceder</a></li>
+                        <li><a href="LogoutServlet">Salir</a></li>
                     </ul>
                 </nav>
             </div>
@@ -58,20 +58,26 @@
                     </div>
                     <form action="loginServlet" method="post">
                         <div class="form-group">
-                            <label for="ce_username">Nombre de usuario: </label>
-                            <%= currentEmployee.getName()%>
+                            <label for="ce_id">ID: </label>
+                            <output><%= currentEmployee.getUser().getId()%></output>
                         </div>
                         <div class="form-group">
-                            <label for="ce_">Salario: </label>
-                            $<%= currentEmployee.getSalary()%>
+                            <label for="ce_username">Nombre de acceso: </label>
+                            <output><%= currentEmployee.getUser().getUsername()%></output>
                         </div>
                         <div class="form-group">
-                            <label for="ce_">Estado del contrato: </label>
-                            <%= currentEmployee.getContractStatus()%>
+                            <label for="ce_name">Nombre completo: </label>
+                            <output><%= currentEmployee.getName()%></output>
                         </div>
-                        <a href="#" class="btn btn-default">Cambiar contraseña</a>
-                        <a href="${pageContext.request.contextPath}/quitJobServlet?quit=true">Renunciar</a>
-                        <br><br>
+                        <div class="form-group">
+                            <label for="ce_salary">Salario: </label>
+                            <output>$<%= currentEmployee.getSalary()%></output>
+                        </div>
+                        <div class="form-group">
+                            <label for="ce_contract">Estado del contrato: </label>
+                            <output><%= currentEmployee.getContractStatus().equals("active")? "Activo" : "Otro" %></output>
+                        </div>
+                        <br>
                         <span class="error">${error}</span>
                     </form>
                 </div>

@@ -6,6 +6,7 @@
 package co.unkitsolutions.servlets;
 
 import co.unkitsolutions.accessdata.entity.Customer;
+import co.unkitsolutions.businesslogic.controller.ResponseMessage;
 import co.unkitsolutions.businesslogic.controller.Shop;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,8 +78,8 @@ public class BuyPartServlet extends HttpServlet {
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Shop shop = new Shop();
         
-        shop.buyPart(customer.getUserId(), Integer.parseInt(partId), Integer.parseInt(partQuant));
-        
+        ResponseMessage responseMessage = shop.buyPart(customer.getUserId(), Integer.parseInt(partId), Integer.parseInt(partQuant));
+        request.setAttribute("message", responseMessage.getErrorMessage());
         request.getRequestDispatcher("/customer/assembler/buyPart.jsp")
                     .forward(request, response);
     }

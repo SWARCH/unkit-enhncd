@@ -43,6 +43,19 @@
             </div>
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
+            
+            <!-- Navigation menu -->
+            <div class="masthead">
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath}/assembler/indexAssembler.jsp">Retroceder</a></li>
+                        <li><a href="LogoutServlet">Salir</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <br>
 
             <div class="row"> <!-- Start View Table -->
                 <h3>Lista de partes</h3>

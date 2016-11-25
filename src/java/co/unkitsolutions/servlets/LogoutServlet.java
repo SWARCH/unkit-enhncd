@@ -7,9 +7,7 @@ package co.unkitsolutions.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author mauricio
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/logout"})
-public class LogoutServlet extends HttpServlet implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,7 +45,7 @@ public class LogoutServlet extends HttpServlet implements Serializable {
         }
     }
 
-   /**
+    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -60,7 +56,10 @@ public class LogoutServlet extends HttpServlet implements Serializable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.getRequestDispatcher("/index.jsp")
+                    .forward(request, response);
     }
 
     /**
@@ -74,13 +73,7 @@ public class LogoutServlet extends HttpServlet implements Serializable {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        System.out.println("logout POST ----------------------------------------");
-        // Destroys the session for this user.
-        if (session != null) {
-            session.invalidate();
-        }
-        request.getRequestDispatcher("index.jsp");
+        processRequest(request, response);
     }
 
     /**
@@ -93,8 +86,4 @@ public class LogoutServlet extends HttpServlet implements Serializable {
         return "Short description";
     }// </editor-fold>
 
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-    }
 }

@@ -44,10 +44,8 @@
             <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
             <!--End header-->
 
-            <!-- The justified navigation menu is meant for single line per list item.
-           Multiple lines will require custom code not provided by Bootstrap. -->
+            <!-- Navigation menu -->
             <div class="masthead">
-                <h3 class="text-muted">Project name</h3>
                 <nav>
                     <ul class="nav nav-justified">
                         <li class="active"><a href="#">Home</a></li>
@@ -116,7 +114,7 @@
         </div><!-- /.container -->
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="bootstrap/js/jquery-3.1.1.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>
